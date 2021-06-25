@@ -1,0 +1,160 @@
+# Copyright 2020 Stripe, Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+name: purchasely-subscriptions
+version: 0.0.1
+specVersion: v1beta
+
+displayName: Run Subscription Payments with Purchasely
+description: Sync your iOS & Android subscriptions with Firebase Authentication & Firebase Firestore.
+
+license: Apache-2.0
+
+sourceUrl: https://github.com/Purchasely/Purchasely-Firebase-Extension
+releaseNotesUrl: https://github.com/Purchasely/Purchasely-Firebase-Extension/CHANGELOG.md
+
+author:
+  authorName: Purchasely
+  url: https://www.purchasely.com
+
+contributors:
+  - authorName: Thomas Léger
+  - authorName: Firebase
+    url: https://firebase.google.com
+
+billingRequired: true
+
+roles:
+  - role: firebaseauth.admin
+    reason: >-
+      Allows the extension to set custom claims for users.
+  - role: datastore.user
+    reason: >-
+      Allows the extension to store customers & subscriptions in Cloud Firestore.
+resources:
+  - name: purchaselyWebhookHandler
+    type: firebaseextensions.v1beta.function
+    description: >-
+      Receives the Purchasely Server to Server webhook, validates it's signature, creates the associated Purchasely Subscription document and Purchasely Event document (if enabled)
+    properties:
+      location: ${LOCATION}
+      runtime: nodejs14
+      httpsTrigger: {}
+
+params:
+  - param: LOCATION
+    label: Cloud Functions deployment location
+    description: >-
+      Where do you want to deploy the functions created for this extension?
+      You usually want a location close to your database.
+      For help selecting a location, refer to the
+      [location selection guide](https://firebase.google.com/docs/functions/locations).
+    type: select
+    options:
+      - label: Iowa (us-central1)
+        value: us-central1
+      - label: South Carolina (us-east1)
+        value: us-east1
+      - label: Northern Virginia (us-east4)
+        value: us-east4
+      - label: Los Angeles (us-west2)
+        value: us-west2
+      - label: Salt Lake City (us-west3)
+        value: us-west3
+      - label: Las Vegas (us-west4)
+        value: us-west4
+      - label: Belgium (europe-west1)
+        value: europe-west1
+      - label: London (europe-west2)
+        value: europe-west2
+      - label: Frankfurt (europe-west3)
+        value: europe-west3
+      - label: Zurich (europe-west6)
+        value: europe-west6
+      - label: Hong Kong (asia-east2)
+        value: asia-east2
+      - label: Tokyo (asia-northeast1)
+        value: asia-northeast1
+      - label: Osaka (asia-northeast2)
+        value: asia-northeast2
+      - label: Seoul (asia-northeast3)
+        value: asia-northeast3
+      - label: Mumbai (asia-south1)
+        value: asia-south1
+      - label: Jakarta (asia-southeast2)
+        value: asia-southeast2
+      - label: Montreal (northamerica-northeast1)
+        value: northamerica-northeast1
+      - label: Sao Paulo (southamerica-east1)
+        value: southamerica-east1
+      - label: Sydney (australia-southeast1)
+        value: australia-southeast1
+    default: us-central1
+    required: true
+    immutable: true
+
+  - param: PURCHASELY_SUBSCRIPTIONS_COLLECTION
+    label: Products and pricing plans collection
+    description: >-
+      What is the path to the Cloud Firestore collection where the extension should store your current users' subscriptions?
+    default: PurchaselySubscriptions
+    validationRegex: "^[^/]+(/[^/]+/[^/]+)*$"
+    validationErrorMessage: Firestore collection paths must be an odd number of segments separated by slashes, e.g. "path/to/collection".
+    required: true
+
+  - param: PURCHASELY_EVENTS_COLLECTION
+    label: Purchasely Webhook Events Log collection
+    description: >-
+      What is the path to the Cloud Firestore collection where the extension should store received and validated Purchasely Subscription Events?
+      This should be a new collection that extension will create when receiving the first events.
+
+      Leave this field empty if you do not want the extension to save logs of received & validated Purchasely Subscription Events.
+    default: PurchaselyEvents
+    validationRegex: "^[^/]+(/[^/]+/[^/]+)*$"
+    validationErrorMessage: Firestore collection paths must be an odd number of segments separated by slashes, e.g. "path/to/collection".
+    required: false
+
+  - param: UPDATE_FIREBASE_AUTH_CUSTOM_CLAIMS
+    label: Update Firebase Authentication Users' custom claims with current subscriptions
+    description: >-
+      Do you want to automatically update your Firebase Authentication User's custom claims
+      (see https://firebase.google.com/docs/auth/admin/custom-claims) with their current subscriptions?
+      If set to 'YES' (default), the extension will consider the Webhook event's user's vendor id to match the user's Firebase Authentication UID
+      and attempt to update said user's with their current subscriptions' status.
+      If set to 'No' (default), the extension will NOT set & update the user's subscriptions in the user's Firebase Authentication Custom Claims.
+
+      If you do not use Firebase Authentication for your app or do not setup the Purchasely User Id in your app
+      (see https://docs.purchasely.com/quick-start/sdk-configuration) to match with the UID provided for your user by Firebase,
+      leave this option to "NO".
+    type: select
+    options:
+      - label: 'YES'
+        value: 'YES'
+      - label: 'NO'
+        value: 'NO'
+    default: 'YES'
+    required: true
+
+  - param: PURCHASELY_SHARED_SECRET
+    label: Purchasely Client Webhook Shared Secret
+    description: >-
+      What is your Purchasely Client Webhook shared secret ?
+      To validate and authenticate incoming webhook requests, the extension needs to verify their signature
+      (see https://docs.purchasely.com/quick-start/webhook-1/detailed-specification#request).
+
+      It can be found or setup in your Purchasely Console (client_webhook_shared_secret)
+      Purchasely Console > Applications > [YOUR APP] > Application settings
+    example: a_shared_secret
+    validationRegex: "^[^/]+(/[^/]+/[^/]+)*$"
+    required: true
