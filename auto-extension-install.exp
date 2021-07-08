@@ -1,0 +1,12 @@
+#!/usr/bin/expect -f
+
+set timeout -1
+spawn yarn run firebase ext:install ./ --params ./.extension-params.env --project $::env(PROJECT_ID) --token $::env(FIREBASE_TOKEN)
+
+expect "Would you like to continue installing this extension?"
+send -- "Y\n"
+
+expect "Would you like to continue?"
+send -- "Y\n"
+
+expect eof

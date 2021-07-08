@@ -16,11 +16,6 @@ const firestore = admin.firestore();
 
 const purchaselyServices = PurchaselyServices(PurchaselyConfig)(auth, firestore);
 
-const runtimeOpts = {
-  timeoutSeconds: PurchaselyConfig.functions.timeoutSeconds,
-  memory: PurchaselyConfig.functions.memory,
-} as FirebaseFunctions.RuntimeOptions;
-
 export const purchaselyWebhookHandler =
   FirebaseFunctions
     .handler

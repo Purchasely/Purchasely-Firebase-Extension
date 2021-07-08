@@ -1,11 +1,9 @@
 import { PurchaselyAppPlatform } from "../../purchasely-events/domain/purchasely-app-platform.enum";
-
-import { PurchaselyEventName } from "../../purchasely-events/domain/purchasely-event-name.enum";
 import { PurchaselyProductPlanType } from "../../purchasely-events/domain/purchasely-product-plan-type.enum";
 import { PurchaselyStore } from "../../purchasely-events/domain/purchasely-store.enum";
 
-export interface PurchaselyWebhookDomain {
-  name: PurchaselyEventName;
+export interface PurchaselyConsumableWebhookDomain {
+  name: string;
   user: {
     anonymous_id?: string;
     vendor_id?: string;
@@ -14,7 +12,7 @@ export interface PurchaselyWebhookDomain {
     product: {
       vendor_id: string;
       plan: {
-        type: PurchaselyProductPlanType;
+        type: PurchaselyProductPlanType.CONSUMABLE;
         vendor_id: string;
       };
     };
@@ -23,7 +21,6 @@ export interface PurchaselyWebhookDomain {
       platform: PurchaselyAppPlatform;
       package_id: string;
     };
-    expires_at: string;
     purchased_at: string;
   };
   received_at: string;

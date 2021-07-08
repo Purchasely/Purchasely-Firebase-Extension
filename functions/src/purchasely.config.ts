@@ -9,6 +9,8 @@ export interface PurchaselyConfigInterface {
     firebaseCustomClaims: {
       enabled: boolean;
     },
+    purchaselyConsumables: PurchaselyFirestoreDestinationSettings,
+    purchaselyNonConsumables: PurchaselyFirestoreDestinationSettings,
     purchaselySubscriptions: PurchaselyFirestoreDestinationSettings,
     purchaselyEvents: PurchaselyFirestoreDestinationSettings
   },
@@ -27,7 +29,15 @@ export const PurchaselyConfig: PurchaselyConfigInterface = {
       collectionName: null,
     },
     firebaseCustomClaims: {
-      enabled: process.env.UPDATE_FIREBASE_AUTH_CUSTOM_CLAIMS === "YES",
+      enabled: process.env.UPDATE_FIREBASE_AUTH_CUSTOM_CLAIMS === "ENABLED",
+    },
+    purchaselyConsumables: {
+      enabled: true,
+      collectionName: process.env.PURCHASELY_CONSUMABLES_COLLECTION as string,
+    },
+    purchaselyNonConsumables: {
+      enabled: true,
+      collectionName: process.env.PURCHASELY_NON_CONSUMABLES_COLLECTION as string,
     },
     purchaselySubscriptions: {
       enabled: true,

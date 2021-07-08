@@ -1,0 +1,43 @@
+name: Deploy Master Branch
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@master
+      - name: Install Firebase
+        run: yarn install
+      - name: Install Expect
+        run: sudo apt-get install expect
+      - name: Install Dependencies
+        run: cd ./functions && yarn install && cd ../
+      - name: Build
+        run: cd ./functions && tsc --build tsconfig.json && cd ../
+      - name: Run tests with mocks
+        run: cd ./functions && yarn run test && cd ../
+      - name: Run tests in local emulator
+        run: |
+          echo TODO
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
+      - name: (Eventually upload coverage? and...) Delete coverage folder so that deployment doesn't fail
+        run: rm -rf functions/coverage
+      - name: Export Client Webhook Shared Secret to Extension Params File
+        env:
+          PURCHASELY_SHARED_SECRET: ${{ secrets.PURCHASELY_SHARED_SECRET }}
+        run: |
+          echo PURCHASELY_SHARED_SECRET=$PURCHASELY_SHARED_SECRET >> .extension-params.env
+          cat .extension-params.env
+      - name: Deploy to Purchasely's Firebase Project
+        run: |
+          ./auto-extension-update.exp
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}

@@ -1,26 +1,26 @@
-Use this extension to keep track of your mobile apps' users' subscription status easily with [Purchasely](https://www.purchasely.com) via Firebase Authentication & Firebase Firestore.
+Use this extension to keep track of your mobile apps' users' In-App Purchases & Subscriptions easily & seamlessly with [Purchasely](https://www.purchasely.com) via Firebase Authentication & Firebase Firestore.
 This extension requires you to separately setup (or have already setup) your Purchasely project.
 
-This extension syncs customers' subscription status with your Cloud Firestore and adds custom claims using Firebase Authentication for convenient access control in your application.
+This extension stores your In-App Purchases & Subscriptions using Cloud Firestore and adds Custom Claims for your users' subscriptions using Firebase Authentication for convenient access control in your application.
 
 #### Recommended usage
 
-This extension is meant for both native & hybrid mobile applications subscriptions using the app stores' in-app subscription APIs.
-Currently supported app stores are the Apple App Store, Googe Play Store, Huawei App Galery & Amazon App Store.
+This extension is meant for both native & hybrid mobile applications In-App Purchases & Subscriptions using the app stores' In-App Purchases APIs.
+Currently supported app stores are the Apple App Store, Googe Play Store, Huawei App Gallery & Amazon App Store.
 
 #### Additional setup
 
 Before installing this extension, set up the following Firebase services in your Firebase project:
 
-- [Cloud Firestore](https://firebase.google.com/docs/firestore) to store customer & subscription details.
+- [Cloud Firestore](https://firebase.google.com/docs/firestore) to store In-App Purchases & Subscriptions details.
   - Follow the steps in the [documentation](https://firebase.google.com/docs/firestore/quickstart#create) to create a Cloud Firestore database.
-- [Firebase Authentication](https://firebase.google.com/docs/auth) to enable different sign-up options for your users.
+- (optional) [Firebase Authentication](https://firebase.google.com/docs/auth) to enable different sign-up options for your users to enable the Custom Claims management.
   - Enable the sign-in methods in the [Firebase console](https://console.firebase.google.com/project/_/authentication/providers) that you want to offer your users.
 
 Then, if you haven't already, in the [Purchasely Console](https://console.purchasely.io/):
 
-- Create a new [Client Webhook Shared Secret](https://docs.purchasely.com/quick-start/webhook-1/detailed-specification#request).
-Purchasely Console > Applications > [YOUR APP] > Application settings
+- Get your [Client shared secret](https://docs.purchasely.com/quick-start/webhook-1/detailed-specification#request).
+Purchasely Console > Applications > [YOUR APP] > App settings > Backend & SDK Configuration
 
 #### Billing
 

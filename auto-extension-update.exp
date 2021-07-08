@@ -1,0 +1,9 @@
+#!/usr/bin/expect -f
+
+set timeout -1
+spawn yarn run firebase ext:update purchasely-subscriptions . --project $::env(PROJECT_ID) --token $::env(FIREBASE_TOKEN)
+
+expect "Do you wish to continue with this update?"
+send -- "Y\n"
+
+expect eof

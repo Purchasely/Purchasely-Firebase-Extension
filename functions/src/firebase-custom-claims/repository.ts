@@ -1,7 +1,7 @@
 import Firebase from "firebase-admin"
 import { PurchaselyFirebaseCustomClaimsDomain } from "./domain/purchasely-firebase-custom-claims.domain";
 
-type RepositoryDomain = {
+export type RepositoryDomain = {
   [key: string]: any;
   purchasely_subscriptions: PurchaselyFirebaseCustomClaimsDomain[];
 }
@@ -9,7 +9,7 @@ type RepositoryDomain = {
 export interface FirebaseCustomClaimsRepositoryInterface {
   get: (userFirestoreId: string) => Promise<RepositoryDomain>;
   update: (userFirestorId: string, item: RepositoryDomain) => Promise<RepositoryDomain>;
-  delete: (userFirestorId: string, item: RepositoryDomain) => Promise<RepositoryDomain>;
+  delete: (userFirestorId: string) => Promise<RepositoryDomain>;
 }
 
 const decodePurchaselyCustomClaims = (customClaims: { [key: string]: any; } | undefined): RepositoryDomain => {

@@ -9,6 +9,14 @@ import {
   PurchaselySubscriptionsServiceFirestoreInstance as SubscriptionsInstance,
   PurchaselySubscriptionsServiceInterface as SusbscriptionsInterface,
 } from "./purchasely-subscriptions/service";
+import {
+  PurchaselyNonConsumablesServiceInterface as NonConsumablesInterface,
+  PurchaselyNonConsumablesServiceFirestoreInstance as NonConsumablesInstance
+} from "./purchasely-non-consumables/service";
+import {
+  PurchaselyConsumablesServiceInterface as ConsumablesInterface,
+  PurchaselyConsumablesServiceFirestoreInstance as ConsumablesInstance
+} from "./purchasely-consumables/service";
 import { PurchaselyLoggingService, PurchaselyLoggingServiceInterface } from "./purchasely-logging/service";
 import { PurchaselyConfigInterface, PurchaselyFirestoreDestinationSettings } from "./purchasely.config";
 import { FirebaseCustomClaimsServiceInstance, FirebaseCustomClaimsServiceInterface } from "./firebase-custom-claims/service";
@@ -26,10 +34,14 @@ export const PurchaselyServices =
       events: EventsInterface | null;
       firebaseCustomClaims: FirebaseCustomClaimsServiceInterface | null;
       logs: PurchaselyLoggingServiceInterface;
+      consumables: ConsumablesInterface | null,
+      nonConsumables: NonConsumablesInterface | null;
       subscriptions: SusbscriptionsInterface | null;
     } => ({
       events: servicesSetup<EventsInterface>(purchaselyConfig.destinations.purchaselyEvents)((collectionName) => EventsInstance(collectionName)(db)),
       firebaseCustomClaims: FirebaseCustomClaimsServiceInstance(auth),
       logs: PurchaselyLoggingService(),
+      consumables: servicesSetup<ConsumablesInterface>(purchaselyConfig.destinations.purchaselyConsumables)((collectionName) => ConsumablesInstance(collectionName)(db)),
+      nonConsumables: servicesSetup<NonConsumablesInterface>(purchaselyConfig.destinations.purchaselyNonConsumables)((collectionName) => NonConsumablesInstance(collectionName)(db)),
       subscriptions: servicesSetup<SusbscriptionsInterface>(purchaselyConfig.destinations.purchaselySubscriptions)((collectionName) => SubscriptionsInstance(collectionName)(db)),
     });
