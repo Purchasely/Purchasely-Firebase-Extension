@@ -13,7 +13,7 @@
 # limitations under the License.
 
 name: purchasely-subscriptions
-version: 1.0.0
+version: 1.0.1
 specVersion: v1beta
 
 displayName: Run In-App Purchases & Subscriptions with Purchasely
@@ -150,7 +150,7 @@ params:
       (see https://firebase.google.com/docs/auth/admin/custom-claims) with their current subscriptions?
       If set to "ENABLED", the extension will consider the Webhook event's user's vendor id to match the user's Firebase Authentication UID
       and attempt to update said user's Custom Claims with their current subscriptions' status.
-      
+
       If set to "DISABLED" (default), the extension will NOT set & update the user's subscriptions in the user's Firebase Authentication Custom Claims.
       If you do not use Firebase Authentication for your app or do not setup the Purchasely User Id in your app
       (see https://docs.purchasely.com/quick-start/sdk-configuration) to match with the UID provided for your user by Firebase,
