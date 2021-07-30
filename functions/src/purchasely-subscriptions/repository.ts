@@ -24,7 +24,7 @@ export const PurchaselySubscriptionsRepository = (collectionName: string) => (db
         .then(() => item);
     },
     update: (_id: string, _item: RepositoryDomain) =>
-      Promise.reject("Method not implemented"),
+      Promise.reject(new Error("Method not implemented")),
     delete: (id: UUID) => {
       return collection
         .doc(id)
