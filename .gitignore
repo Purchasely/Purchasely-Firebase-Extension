@@ -15,6 +15,7 @@ tmp
 
 # Coverage reports
 coverage
+.nyc_output/
 
 # API keys and secrets
 .env
@@ -33,9 +34,6 @@ Thumbs.db
 
 # Ignore built ts files
 dist/**/*
-
-# ignore yarn.lock
-yarn.lock
 
 # Typescript v1 declaration files
 typings/

@@ -1,7 +1,10 @@
 #!/usr/bin/expect -f
 
+set dirname [lindex $argv 0];
+send_user "$dirname\n"
+
 set timeout -1
-spawn yarn run firebase ext:update purchasely-subscriptions . --project $::env(PROJECT_ID) --token $::env(FIREBASE_TOKEN)
+spawn yarn run firebase ext:update purchasely-subscriptions ../$dirname --project $::env(PROJECT_ID) --token $::env(FIREBASE_TOKEN)
 
 expect "Do you wish to continue with this update?"
 send -- "Y\n"

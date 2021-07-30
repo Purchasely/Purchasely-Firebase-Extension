@@ -13,7 +13,7 @@
 # limitations under the License.
 
 name: purchasely-subscriptions
-version: 1.0.1
+version: 1.0.2
 specVersion: v1beta
 
 displayName: Run In-App Purchases & Subscriptions with Purchasely
@@ -106,7 +106,7 @@ params:
     immutable: true
 
   - param: PURCHASELY_SUBSCRIPTIONS_COLLECTION
-    label: Users' current subscriptions
+    label: Users' current subscriptions Firestore collection
     description: >-
       What is the path to the Cloud Firestore collection where the extension should store your current users' subscriptions?
     default: PurchaselySubscriptions
@@ -115,7 +115,7 @@ params:
     required: true
 
   - param: PURCHASELY_CONSUMABLES_COLLECTION
-    label: Users' purchased Consumables
+    label: Users' purchased Consumables Firestore collection
     description: >-
       What is the path to the Cloud Firestore collection where the extension should store your current users' consumables?
     default: PurchaselyConsumables
@@ -124,7 +124,7 @@ params:
     required: true
 
   - param: PURCHASELY_NON_CONSUMABLES_COLLECTION
-    label: Users' Purchased Non Consumables
+    label: Users' Purchased Non Consumables Firestore collection
     description: >-
       What is the path to the Cloud Firestore collection where the extension should store your current users' non consumables?
     default: PurchaselyNonConsumables
@@ -133,10 +133,10 @@ params:
     required: true
 
   - param: PURCHASELY_EVENTS_COLLECTION
-    label: Purchasely Webhook Raw Events collection
+    label: Purchasely Webhook Raw Events Firestore collection
     description: >-
       What is the path to the Cloud Firestore collection where the extension should store the raw events coming from the Purchasely webhook?
-      This should be a new collection that extension will create when receiving the first events.
+      This should be a new collection that the extension will create when receiving the first events.
       Leave this field empty if you do not want the extension to save the raw Purchasely Events.
     default: PurchaselyEvents
     validationRegex: "^[^/]+(/[^/]+/[^/]+)*$"
