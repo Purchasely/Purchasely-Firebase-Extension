@@ -147,6 +147,19 @@ firestore.collection('${param:PURCHASELY_SUBSCRIPTIONS_COLLECTION}')
   });
 ```
 
+Kotlin:
+```kotlin
+Firebase.firestore.collection(PURCHASELY_SUBSCRIPTIONS_COLLECTION)
+      .whereEqualTo("user.vendor_id", USER_FIRESTORE_AUTHENTICATION_ID)
+      .whereEqualTo("is_subscribed", true)
+      .addSnapshotListener { value, error ->
+          val subscriptions = value?.documents?.map { it.data }
+                                    ?.filter { it?.get("is_subscribed") == true }
+
+          val isSubscribed = subscriptions?.isEmpty()?.not() ?: false
+      }
+```
+
 #### List your user's consumables
 
 Users' consumables are normal collections and docs in your Cloud Firestore and can be queried as such:
@@ -175,6 +188,15 @@ firestore.collection('${param:PURCHASELY_CONSUMABLES_COLLECTION}')
   });
 ```
 
+Kotlin:
+```kotlin
+Firebase.firestore.collection(PURCHASELY_CONSUMABLES_COLLECTION)
+      .whereEqualTo("user.vendor_id", USER_FIRESTORE_AUTHENTICATION_ID)
+      .addSnapshotListener { value, error ->
+          val consumables = value?.documents?.map { it.data }
+      }
+```
+
 #### List your user's non-consumables
 
 Users' non-consumables are normal collections and docs in your Cloud Firestore and can be queried as such:
@@ -201,6 +223,15 @@ firestore.collection('${param:PURCHASELY_NON_CONSUMABLES_COLLECTION}')
       console.log(doc.id, ' => ', doc.data());
     });
   });
+```
+
+Kotlin:
+```kotlin
+Firebase.firestore.collection(PURCHASELY_NON_CONSUMABLES_COLLECTION)
+      .whereEqualTo("user.vendor_id", USER_FIRESTORE_AUTHENTICATION_ID)
+      .addSnapshotListener { value, error ->
+          val nonConsumables = value?.documents?.map { it.data }
+      }
 ```
 
 #### Monitoring
