@@ -18,9 +18,9 @@ This extension is meant for both native & hybrid mobile applications In-App Purc
 Currently supported app stores are the Apple App Store, Googe Play Store, Huawei App Gallery & Amazon App Store.
 
 
-## Implementation apps
+## Demonstration apps
 
-You can find examples of iOS & Android apps implementing Purchasely using this Firebase Extension in the [Purchasely/Purchasely-DemoFirebase GitHub repository](https://github.com/Purchasely/Purchasely-DemoFirebase).
+You can find examples of iOS & Android apps showcasing a Purchasely implementation using this Firebase Extension in the [Purchasely/Purchasely-DemoFirebase GitHub repository](https://github.com/Purchasely/Purchasely-DemoFirebase).
 
 
 ## Setting up the extension
