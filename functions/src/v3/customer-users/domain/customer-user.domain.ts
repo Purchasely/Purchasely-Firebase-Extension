@@ -1,0 +1,1 @@
+export { CustomerUserDomain } from '../../../v2/customer-users/domain/customer-user.domain';

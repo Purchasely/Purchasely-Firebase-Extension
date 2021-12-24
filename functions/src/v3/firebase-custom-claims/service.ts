@@ -1,0 +1,1 @@
+export { FirebaseCustomClaimsServiceInterface, FirebaseCustomClaimsService, FirebaseCustomClaimsServiceInstance } from '../../v2/firebase-custom-claims/service'
