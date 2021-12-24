@@ -157,11 +157,11 @@ params:
       leave this option to "DISABLED".
     type: select
     options:
-      - label: 'ENABLED'
-        value: 'ENABLED'
-      - label: 'DISABLED'
-        value: 'DISABLED'
-    default: 'DISABLED'
+      - label: "ENABLED"
+        value: "ENABLED"
+      - label: "DISABLED"
+        value: "DISABLED"
+    default: "DISABLED"
     required: true
 
   - param: PURCHASELY_SHARED_SECRET

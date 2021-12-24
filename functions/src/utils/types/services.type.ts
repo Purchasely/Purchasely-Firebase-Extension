@@ -1,8 +1,8 @@
 import { PurchaselyEventsServiceInterface as EventsService } from "../../purchasely-events/service";
 import { PurchaselySubscriptionsServiceInterface as SubscriptionsService } from "../../purchasely-subscriptions/service";
-import { PurchaselyConsumablesServiceInterface as ConsumablesService } from "../../purchasely-consumables/service";
+import { PurchaselyConsumablesServiceInterface as ConsumablesService } from "../../v2/purchasely-consumables/service";
 import { PurchaselyNonConsumablesServiceInterface as NonConsumablesService } from "../../purchasely-non-consumables/service";
-import { FirebaseCustomClaimsServiceInterface as CustomClaimsService } from "../../firebase-custom-claims/service";
+import { FirebaseCustomClaimsServiceInterface as CustomClaimsService } from "../../v2/firebase-custom-claims/service";
 import { PurchaselyLoggingServiceInterface } from "../../purchasely-logging/service";
 
 export type Services = {
