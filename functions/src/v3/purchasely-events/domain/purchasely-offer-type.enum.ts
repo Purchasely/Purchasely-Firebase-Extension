@@ -1,0 +1,7 @@
+export enum PurchaselyOfferType {
+  INTRO_OFFER = "INTRO_OFFER",
+  FREE_TRIAL = "FREE_TRIAL",
+  PROMOTIONAL_OFFER = "PROMOTIONAL_OFFER",
+  OFFER_CODE = "OFFER_CODE",
+  NONE = "NONE",
+}
