@@ -25,7 +25,7 @@ You can find examples of iOS & Android apps showcasing a Purchasely implementati
 
 ## Setting up the extension
 
-To setup the extension, visit **[https://console.firebase.google.com/project/_/extensions/install?ref=purchasely/purchasely-in-app-purchases@1.0.0](https://console.firebase.google.com/project/_/extensions/install?ref=purchasely/purchasely-in-app-purchases@1.0.0)**.
+To setup the extension, visit **[https://console.firebase.google.com/project/_/extensions/install?ref=purchasely/purchasely-in-app-purchases](https://console.firebase.google.com/project/_/extensions/install?ref=purchasely/purchasely-in-app-purchases)**
 
 #### Additional setup
 
