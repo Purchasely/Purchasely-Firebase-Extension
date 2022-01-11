@@ -1,0 +1,109 @@
+name: Check Feature PR
+on:
+  push:
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@master
+      - name: Cache Yarn Dependencies
+        uses: actions/cache@v2
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+      - name: Setup Node Version
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+      - name: Install Firebase
+        run: |
+          yarn install
+          yarn global add firebase-tools
+      - name: Install Dependencies
+        run: |
+          cd ./functions
+          yarn install
+          cd ../
+      - name: Build
+        run: |
+          cd ./functions
+          tsc --build tsconfig.json
+          cd ../
+      - name: Archive Extension Build Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: latest-develop-artifact
+          retention-days: 30
+          path: |
+            auto-extension-install.exp
+            auto-extension-update.exp
+            extension.yaml
+            firebase.json
+            package.json
+            POSTINSTALL.md
+            PREINSTALL.md
+            functions/src
+            functions/__tests__
+            functions/lib
+            functions/tsconfig.json
+            functions/package.json
+            functions/yarn.lock
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Download Build Artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: latest-develop-artifact
+      - name: Cache Yarn Dependencies
+        uses: actions/cache@v2
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+      - name: Setup Node Version
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+      - name: Install Firebase
+        run: |
+          yarn install
+          yarn global add firebase-tools
+      - name: Install Dependencies
+        run: |
+          cd ./functions
+          yarn install
+          cd ../
+      - name: Run tests with mocks
+        run: |
+          firebase emulators:start --only firestore &
+          cd ./functions
+          yarn run test
+          cd ../
+        env:
+          FIRESTORE_EMULATOR_HOST: "localhost:8080"
+      - name: Archive Extension Coverage
+        uses: actions/upload-artifact@v2
+        with:
+          name: latest-develop-coverage
+          retention-days: 30
+          path: |
+            functions/coverage
+  coverage:
+    name: Upload Coverage
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Download Test Coverage Artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: latest-develop-coverage
+      - name: Archive Extension Coverage
+        run: echo "Upload the extension's test coverage"
