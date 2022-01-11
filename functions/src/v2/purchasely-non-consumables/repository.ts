@@ -1,5 +1,5 @@
-import { PurchaselyRepository } from "../utils/types/purchasely-repository.type";
-import { UUID } from "../utils/types/uuid.type";
+import { PurchaselyRepository } from "../../utils/types/purchasely-repository.type";
+import { UUID } from "../../utils/types/uuid.type";
 import { PurchaselyNonConsumableDomain } from "./domain/purchasely-non-consumable.domain";
 import FirebaseFirestore from "@google-cloud/firestore";
 

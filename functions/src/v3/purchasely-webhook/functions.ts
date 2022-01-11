@@ -22,8 +22,8 @@ export const eventHeaderSignatureIsValid = (sharedSecret: string) => (request: R
   return computedSignature === receivedSignature;
 }
 
-const webhookEventsController = (productPlanType: PurchaselyProductPlanType): ((ajv: Ajv) => (services: Services) => (request: Request) => Promise<void>) => {
-  switch (productPlanType) {
+const webhookEventsController = (purchaseType: PurchaselyProductPlanType): ((ajv: Ajv) => (services: Services) => (request: Request) => Promise<void>) => {
+  switch (purchaseType) {
     case (PurchaselyProductPlanType.RENEWING_SUBSCRIPTION):
       return SubscriptionWebhookController;
     case (PurchaselyProductPlanType.NON_RENEWING_SUBSCRIPTION):
@@ -48,14 +48,14 @@ export const functions: {
       return;
     }
 
-    const productPlanType = (request.body as any).properties.product.plan.type as PurchaselyProductPlanType;
+    const purchaseType = (request.body as any).purchase_type as PurchaselyProductPlanType;
 
-    return webhookEventsController(productPlanType)(ajv)(services)(request)
+    return webhookEventsController(purchaseType)(ajv)(services)(request)
       .then(() => {
         const result = {
           clientType: "PURCHASELY_FIREBASE_EXTENSION",
-          clientVersion: "0.0.2",
-          handledApiVersion: "2"
+          clientVersion: "0.0.3",
+          handledApiVersion: "3"
         };
         response.status(200).send(result);
       })

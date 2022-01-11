@@ -14,12 +14,14 @@ export const PurchaselyEventsRepository = (collectionName: string) => (db: Fireb
         .doc(id)
         .set({
           ...item,
-          properties: {
-            ...item.properties,
-            ...(() => item.properties.expires_at === undefined ? ({}) : ({ expires_at: item.properties.expires_at.toJSDate() }))(),
-            purchased_at: item.properties.purchased_at.toJSDate(),
-          },
-          received_at: item.received_at.toJSDate(),
+          auto_resume_at: item.auto_resume_at === undefined ? null : item.auto_resume_at.toJSDate(),
+          defer_end_at: item.defer_end_at === undefined ? null : item.defer_end_at.toJSDate(),
+          event_created_at: item.event_created_at.toJSDate(),
+          effective_next_renewal_at: item.effective_next_renewal_at === undefined ? null : item.effective_next_renewal_at.toJSDate(),
+          grace_period_expires_at: item.grace_period_expires_at === undefined ? null : item.grace_period_expires_at.toJSDate(),
+          next_renewal_at: item.next_renewal_at === undefined ? null : item.next_renewal_at.toJSDate(),
+          original_purchased_at: item.original_purchased_at === undefined ? null : item.original_purchased_at.toJSDate(),
+          purchased_at: item.purchased_at.toJSDate(),
         })
         .then(() => item);
     },

@@ -1,8 +1,8 @@
-import { UUID } from "../utils/types/uuid.type";
+import { UUID } from "../../utils/types/uuid.type";
 import { PurchaselyNonConsumablesRepository } from "./repository";
 import { PurchaselyNonConsumableDomain } from "./domain/purchasely-non-consumable.domain";
-import { PurchaselyRepository } from "../utils/types/purchasely-repository.type";
-import { PurchaselyService } from "../utils/types/purchasely-service.type";
+import { PurchaselyRepository } from "../../utils/types/purchasely-repository.type";
+import { PurchaselyService } from "../../utils/types/purchasely-service.type";
 import FirebaseFirestore from "@google-cloud/firestore";
 
 type ServiceDomain = PurchaselyNonConsumableDomain;
