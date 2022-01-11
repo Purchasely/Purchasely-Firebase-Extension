@@ -1,11 +1,10 @@
 import {
   PurchaselyOfferType,
-  PurchaselyProductPlanType,
   PurchaselyStore,
   PurchaselySubscriptionStatus,
 } from "../../purchasely-events";
 
-export const PurchaselyWebhookDtoSchema = {
+export const PurchaselySubscriptionsWebhookDtoSchema = {
   additionalProperties: true,
   type: "object",
   properties: {
@@ -92,9 +91,6 @@ export const PurchaselyWebhookDtoSchema = {
     product: {
       type: "string",
     },
-    purchase_type: {
-      enum: Object.values(PurchaselyProductPlanType),
-    },
     purchased_at: {
       type: "string",
       format: "date-time",
@@ -148,10 +144,13 @@ export const PurchaselyWebhookDtoSchema = {
   },
   required: [
     "api_version",
+    "effective_next_renewal_at",
+    "effective_next_renewal_at_ms",
     "environment",
     "event_name",
     "event_created_at",
     "event_created_at_ms",
+    "offer_type",
     "original_purchased_at",
     "original_purchased_at_ms",
     "product",
