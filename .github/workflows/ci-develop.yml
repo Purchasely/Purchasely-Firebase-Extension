@@ -14,8 +14,12 @@ jobs:
       - name: Cache Yarn Dependencies
         uses: actions/cache@v2
         with:
-          path: '**/node_modules'
+          path: "**/node_modules"
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+      - name: Setup Node Version
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
       - name: Install Firebase
         run: |
           yarn install
@@ -61,8 +65,12 @@ jobs:
       - name: Cache Yarn Dependencies
         uses: actions/cache@v2
         with:
-          path: '**/node_modules'
+          path: "**/node_modules"
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+      - name: Setup Node Version
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
       - name: Install Firebase
         run: |
           yarn install
@@ -110,8 +118,12 @@ jobs:
       - name: Cache Yarn Dependencies
         uses: actions/cache@v2
         with:
-          path: '**/node_modules'
+          path: "**/node_modules"
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+      - name: Setup Node Version
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
       - name: Install Firebase
         run: |
           yarn install
