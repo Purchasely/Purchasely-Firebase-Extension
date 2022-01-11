@@ -3,6 +3,7 @@ import { UUID } from "../../../utils/types/uuid.type";
 
 import {
   PurchaselyOfferType,
+  PurchaselyProductPlanType,
   PurchaselyStore,
   PurchaselySubscriptionStatus,
 } from "./";
@@ -30,15 +31,17 @@ export interface PurchaselyEventDomain {
   original_purchased_at?: DateTime;
   original_purchased_at_ms?: number;
   plan?: string;
-  offer_type: PurchaselyOfferType;
+  offer_type?: PurchaselyOfferType;
   previous_offer_type?: PurchaselyOfferType;
   previous_plan?: string;
   product: string;
+  purchase_type: PurchaselyProductPlanType,
   purchased_at: DateTime;
   purchased_at_ms: number;
   purchasely_one_time_purchase_id?: string;
   purchasely_subscription_id?: string;
   store: PurchaselyStore;
+  store_app_bundle_id: string;
   store_country: string | null;
   store_original_transaction_id: string;
   store_product_id: string;

@@ -1,0 +1,1 @@
+export { PurchaselyAppPlatform } from "../../../v2/purchasely-events/domain/purchasely-app-platform.enum";

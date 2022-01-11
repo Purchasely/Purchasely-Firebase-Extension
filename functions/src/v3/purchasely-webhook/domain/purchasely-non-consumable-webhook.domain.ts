@@ -1,27 +1,34 @@
-import { PurchaselyAppPlatform } from "../../purchasely-events/domain/purchasely-app-platform.enum";
-import { PurchaselyProductPlanType } from "../../purchasely-events/domain/purchasely-product-plan-type.enum";
-import { PurchaselyStore } from "../../purchasely-events/domain/purchasely-store.enum";
+import {
+  PurchaselyProductPlanType,
+  PurchaselyStore,
+} from "../../purchasely-events";
 
 export interface PurchaselyNonConsumableWebhookDomain {
-  name: string;
-  user: {
-    anonymous_id?: string;
-    vendor_id?: string;
-  };
-  properties: {
-    product: {
-      vendor_id: string;
-      plan: {
-        type: PurchaselyProductPlanType.NON_CONSUMABLE;
-        vendor_id: string;
-      };
-    };
-    store: PurchaselyStore;
-    app: {
-      platform: PurchaselyAppPlatform;
-      package_id: string;
-    };
-    purchased_at: string;
-  };
-  received_at: string;
-}
+  anonymous_user_id?: string;
+  api_version: number;
+  content_id?: string;
+  environment: string;
+  event_name: string;
+  event_created_at: string;
+  event_created_at_ms: number;
+  is_family_shared?: boolean;
+  original_purchased_at: string;
+  original_purchased_at_ms: number;
+  plan?: string;
+  product: string;
+  purchase_type: PurchaselyProductPlanType.NON_CONSUMABLE;
+  purchased_at: string;
+  purchased_at_ms: number;
+  purchasely_one_time_purchase_id?: string;
+  store: PurchaselyStore;
+  store_app_bundle_id: string;
+  store_country: string;
+  store_original_transaction_id: string;
+  store_product_id: string;
+  store_transaction_id: string;
+  transferred_from_user_id?: string;
+  transferred_to_user_id?: string;
+  transferred_from_anonymous_user_id?: string;
+  transferred_to_anonymous_user_id?: string;
+  user_id?: string;
+};

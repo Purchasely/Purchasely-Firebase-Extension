@@ -1,0 +1,1 @@
+export { PurchaselyProductPlanType } from "../../../v2/purchasely-events/domain/purchasely-product-plan-type.enum";

@@ -1,16 +1,22 @@
 import Ajv from "ajv";
 import { Request } from "express";
 import { PurchaselyConsumableWebhookDomain } from "./domain/purchasely-consumable-webhook.domain";
-import { PurchaselyNonSubscriptionWebhookDtoSchema } from "./dto/non-subscription-webhook.dto";
+import { PurchaselyWebhookDtoSchema } from "./dto/webhook.dto";
 
 import { PurchaselyEventsServiceInterface as EventsService } from "../purchasely-events/service";
 import { PurchaselyConsumablesServiceInterface as ConsumablesService } from "../purchasely-consumables/service";
-import { PurchaselyEventDomain } from "../purchasely-events/domain/purchasely-event.domain";
+import {
+  PurchaselyAppPlatform,
+  PurchaselyEventDomain,
+  PurchaselyEventName,
+  PurchaselyProductPlanType,
+  PurchaselyStore
+} from "../purchasely-events/domain";
 import { DateTime } from "luxon";
 import { v4 as uuid } from "uuid";
 import { PurchaselyConsumableDomain } from "../purchasely-consumables/domain/purchasely-consumable.domain";
 
-import { Services } from "../utils/types/services.type"
+import { Services } from "../../utils/types/services.type"
 
 export const saveConsumableEvent = (service: EventsService | null) => (webhook: PurchaselyConsumableWebhookDomain): Promise<PurchaselyEventDomain | null> => {
   if (service === null) {
@@ -18,14 +24,14 @@ export const saveConsumableEvent = (service: EventsService | null) => (webhook: 
     return Promise.resolve(null);
   }
 
+  const dateFromOptionalDateString = (dateString?: string): DateTime | undefined => dateString === undefined ? undefined : DateTime.fromISO(dateString);
+
   var event: PurchaselyEventDomain = {
     id: uuid(),
     ...webhook,
-    properties: {
-      ...webhook.properties,
-      purchased_at: DateTime.fromISO(webhook.properties.purchased_at),
-    },
-    received_at: DateTime.fromISO(webhook.received_at),
+    event_created_at: DateTime.fromISO(webhook.event_created_at),
+    original_purchased_at: dateFromOptionalDateString(webhook.original_purchased_at),
+    purchased_at: DateTime.fromISO(webhook.purchased_at),
   };
   return service.create(event.id, event);
 };
@@ -34,23 +40,40 @@ export const saveConsumable = (service: ConsumablesService | null) => (webhook: 
   if (service === null) {
     return Promise.resolve(null);
   }
+  else if (webhook.event_name !== PurchaselyEventName.ACTIVATE) {
+    return Promise.resolve(null);
+  }
+  if (webhook.plan === undefined) {
+    return Promise.resolve(null);
+  }
 
   const consumable: PurchaselyConsumableDomain = {
     id: uuid(),
-    user: webhook.user,
-    properties: {
-      product: webhook.properties.product,
-      app: webhook.properties.app,
-      purchased_at: DateTime.fromISO(webhook.properties.purchased_at),
+    user: {
+      vendor_id: webhook.user_id
     },
-    received_at: DateTime.fromISO(webhook.received_at),
+    properties: {
+      product: {
+        vendor_id: webhook.product,
+        plan: {
+          type: PurchaselyProductPlanType.CONSUMABLE,
+          vendor_id: webhook.plan
+        }
+      },
+      app: {
+        platform: webhook.store === PurchaselyStore.APPLE_APP_STORE ? PurchaselyAppPlatform.IOS : PurchaselyAppPlatform.ANDROID,
+        package_id: webhook.store_app_bundle_id
+      },
+      purchased_at: DateTime.fromISO(webhook.purchased_at),
+    },
+    received_at: DateTime.fromISO(webhook.event_created_at),
   };
 
   return service.create(consumable.id, consumable);
 };
 
 export const purchaselyConsumableEventController = (ajv: Ajv) => (services: Services) => (request: Request): Promise<void> => {
-  if (!ajv.validate(PurchaselyNonSubscriptionWebhookDtoSchema, request.body)) {
+  if (!ajv.validate(PurchaselyWebhookDtoSchema, request.body)) {
     return Promise.reject(ajv.errors);
   }
   const requestDto = request.body as PurchaselyConsumableWebhookDomain;
@@ -71,7 +94,7 @@ export const purchaselyConsumableEventController = (ajv: Ajv) => (services: Serv
       const loggedResult = {
         savedEvent,
         savedConsumable,
-        userId: requestDto.user.vendor_id === undefined ? null : requestDto.user.vendor_id,
+        userId: requestDto.user_id === undefined ? null : requestDto.user_id,
       };
       services.logs.logger.info("Webhook - Consumable - Result: ", JSON.stringify(loggedResult));
       return

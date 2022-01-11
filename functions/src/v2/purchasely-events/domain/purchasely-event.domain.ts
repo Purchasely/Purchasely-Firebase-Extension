@@ -1,5 +1,5 @@
 import { DateTime } from "luxon";
-import { UUID } from "../../../utils/types/uuid.type";
+import { UUID } from "../../../../utils/types/uuid.type";
 import { PurchaselyAppPlatform } from "./purchasely-app-platform.enum";
 import { PurchaselyProductPlanType } from "./purchasely-product-plan-type.enum";
 import { PurchaselyStore } from "./purchasely-store.enum";
