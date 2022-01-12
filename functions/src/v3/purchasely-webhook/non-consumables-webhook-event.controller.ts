@@ -6,26 +6,22 @@ import { PurchaselyWebhookDtoSchema } from "./dto/webhook.dto";
 import { PurchaselyEventsServiceInterface as EventsService } from "../purchasely-events/service";
 import { PurchaselyNonConsumablesServiceInterface as NonConsumablesService } from "../purchasely-non-consumables/service";
 import {
-  PurchaselyAppPlatform,
   PurchaselyEventDomain,
   PurchaselyEventName,
-  PurchaselyProductPlanType,
-  PurchaselyStore
+  PurchaselyProductPlanType
 } from "../purchasely-events/domain";
 import { DateTime } from "luxon";
 import { v4 as uuid } from "uuid";
 import { PurchaselyNonConsumableDomain } from "../purchasely-non-consumables/domain/purchasely-non-consumable.domain";
 
 import { Services } from "../../utils/types/services.type"
+import { appPlatformFromStore } from "../../utils/types/app-platform";
 
 export const deleteNonConsumable = (service: NonConsumablesService | null) => (webhook: PurchaselyNonConsumableWebhookDomain): Promise<void> => {
   if (service === null) {
     return Promise.resolve();
   }
   else if (webhook.event_name !== PurchaselyEventName.DEACTIVATE) {
-    return Promise.resolve();
-  }
-  if (webhook.plan === undefined) {
     return Promise.resolve();
   }
 
@@ -64,9 +60,6 @@ export const saveNonConsumable = (service: NonConsumablesService | null) => (web
   else if (webhook.event_name !== PurchaselyEventName.ACTIVATE) {
     return Promise.resolve(null);
   }
-  if (webhook.plan === undefined) {
-    return Promise.resolve(null);
-  }
 
   const userId =
     webhook.user_id !== undefined && webhook.user_id !== null
@@ -87,7 +80,7 @@ export const saveNonConsumable = (service: NonConsumablesService | null) => (web
         }
       },
       app: {
-        platform: webhook.store === PurchaselyStore.APPLE_APP_STORE ? PurchaselyAppPlatform.IOS : PurchaselyAppPlatform.ANDROID,
+        platform: appPlatformFromStore(webhook.store),
         package_id: webhook.store_app_bundle_id
       },
       purchased_at: DateTime.fromISO(webhook.purchased_at),
