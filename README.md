@@ -22,6 +22,15 @@ Currently supported app stores are the Apple App Store, Googe Play Store, Huawei
 
 You can find examples of iOS & Android apps showcasing a Purchasely implementation using this Firebase Extension in the [Purchasely/Purchasely-DemoFirebase GitHub repository](https://github.com/Purchasely/Purchasely-DemoFirebase).
 
+## Updating from 1.0.0
+
+To update the extension, please go to your Firebase Console > Extensions > Run In-App Purchases & Subscriptions with Purchasely.
+If you are currently using purchasely/purchasely-in-app-purchases@1.0.0, the console should display an update message, and allow you to update the Extension, and walk you through the wizard.
+
+Please note that during the extension's update, the extension might be unavailable, and you may not be able to receive and process webhook events from Purchasely for a few minutes.
+As our backend retries these events, this will resolve on it's own.
+
+Once the extension is up to date, you may migrate your webhook to the latest (V3) version in the Purchasely Console.
 
 ## Setting up the extension
 
