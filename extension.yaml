@@ -132,13 +132,24 @@ params:
     validationErrorMessage: Firestore collection paths must be an odd number of segments separated by slashes, e.g. "path/to/collection".
     required: true
 
-  - param: PURCHASELY_EVENTS_COLLECTION
-    label: Purchasely Webhook Raw Events Firestore collection
+  - param: PURCHASELY_EVENTS_COLLECTION_2
+    label: Purchasely Webhook Raw Events Firestore collection (for legacy, aka v2, events format)
+    description: >-
+      What is the path to the Cloud Firestore collection where the extension should store the raw legacy events coming from the Purchasely webhook?
+      This should be a new collection that the extension will create when receiving the first events.
+      Leave this field empty if you do not want the extension to save the raw Purchasely Legacy Events.
+    default: PurchaselyEvents
+    validationRegex: "^[^/]+(/[^/]+/[^/]+)*$"
+    validationErrorMessage: Firestore collection paths must be an odd number of segments separated by slashes, e.g. "path/to/collection".
+    required: false
+
+  - param: PURCHASELY_EVENTS_COLLECTION_3
+    label: Purchasely Webhook Raw Events Firestore collection (current events format)
     description: >-
       What is the path to the Cloud Firestore collection where the extension should store the raw events coming from the Purchasely webhook?
       This should be a new collection that the extension will create when receiving the first events.
       Leave this field empty if you do not want the extension to save the raw Purchasely Events.
-    default: PurchaselyEvents
+    default: PurchaselyEvents_3
     validationRegex: "^[^/]+(/[^/]+/[^/]+)*$"
     validationErrorMessage: Firestore collection paths must be an odd number of segments separated by slashes, e.g. "path/to/collection".
     required: false
