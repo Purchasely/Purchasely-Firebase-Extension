@@ -14,7 +14,7 @@ export interface PurchaselyNonConsumableWebhookDomain {
   is_family_shared?: boolean;
   original_purchased_at: string;
   original_purchased_at_ms: number;
-  plan?: string;
+  plan: string;
   product: string;
   purchase_type: PurchaselyProductPlanType.NON_CONSUMABLE;
   purchased_at: string;

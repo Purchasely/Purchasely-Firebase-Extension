@@ -69,7 +69,7 @@ test("Custom Claims Service Creation method does not duplicate custom claims if 
   const event = defaultWebhookEvent();
   const services = servicesFactory();
   const factoryService = services.firebaseCustomClaims;
-  await factoryService.create(event.user_id as string, [{ product: event.product, plan: event.plan as string }]);
+  await factoryService.create(event.user_id as string, [{ product: event.product, plan: event.plan }]);
   const service = factoryService;
   await saveFirebaseCustomClaims(service)(event);
   const customClaims = await services.customClaimsRepository.get(event.user_id as string);
