@@ -38,10 +38,10 @@ export const PurchaselyServices =
       nonConsumables: NonConsumablesInterface | null;
       subscriptions: SusbscriptionsInterface | null;
     } => ({
-      events: servicesSetup<EventsInterface>(purchaselyConfig.destinations.purchaselyEvents)((collectionName) => EventsInstance(collectionName)(db)),
+      events: servicesSetup<EventsInterface>(purchaselyConfig[3].destinations.purchaselyEvents)((collectionName) => EventsInstance(collectionName)(db)),
       firebaseCustomClaims: FirebaseCustomClaimsServiceInstance(auth),
       logs: PurchaselyLoggingService(),
-      consumables: servicesSetup<ConsumablesInterface>(purchaselyConfig.destinations.purchaselyConsumables)((collectionName) => ConsumablesInstance(collectionName)(db)),
-      nonConsumables: servicesSetup<NonConsumablesInterface>(purchaselyConfig.destinations.purchaselyNonConsumables)((collectionName) => NonConsumablesInstance(collectionName)(db)),
-      subscriptions: servicesSetup<SusbscriptionsInterface>(purchaselyConfig.destinations.purchaselySubscriptions)((collectionName) => SubscriptionsInstance(collectionName)(db)),
+      consumables: servicesSetup<ConsumablesInterface>(purchaselyConfig[3].destinations.purchaselyConsumables)((collectionName) => ConsumablesInstance(collectionName)(db)),
+      nonConsumables: servicesSetup<NonConsumablesInterface>(purchaselyConfig[3].destinations.purchaselyNonConsumables)((collectionName) => NonConsumablesInstance(collectionName)(db)),
+      subscriptions: servicesSetup<SusbscriptionsInterface>(purchaselyConfig[3].destinations.purchaselySubscriptions)((collectionName) => SubscriptionsInstance(collectionName)(db)),
     });
