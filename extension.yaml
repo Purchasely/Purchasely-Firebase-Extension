@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: purchasely-subscriptions
+name: purchasely-in-app-purchases
 version: 1.0.2
 specVersion: v1beta
 
