@@ -4,7 +4,7 @@ import { Request, Response } from "express";
 import { PurchaselyWebhookDtoSchema } from "./dto/webhook.dto";
 import { PurchaselyConfigInterface } from "../../purchasely.config";
 import { PurchaselyProductPlanType } from "../purchasely-events/domain/purchasely-product-plan-type.enum";
-import { Services } from "../../utils/types/services.type"
+import { Services } from "../services.type"
 
 import { purchaselyConsumableEventController as ConsumableWebhookController } from "./consumables-webhook-event.controller"
 import { purchaselyNonConsumableEventController as NonConsumableWebhookController } from "./non-consumables-webhook-event.controller"

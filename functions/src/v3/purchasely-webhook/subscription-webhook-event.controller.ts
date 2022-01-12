@@ -15,7 +15,7 @@ import { PurchaselySubscriptionDomain } from "../purchasely-subscriptions/domain
 import { PurchaselyEventName } from "../purchasely-events/domain/purchasely-event-name.enum";
 import { PurchaselyFirebaseCustomClaimsDomain } from "../firebase-custom-claims/domain/purchasely-firebase-custom-claims.domain";
 
-import { Services } from "../../utils/types/services.type"
+import { Services } from "../services.type"
 import { appPlatformFromStore } from "../../utils/types/app-platform";
 
 export const saveSubscriptionEvent = (service: EventsService | null) => (webhook: PurchaselySubscriptionWebhookDomain): Promise<PurchaselyEventDomain | null> => {
