@@ -7,9 +7,7 @@ import { PurchaselyEventsServiceInterface as EventsService } from "../purchasely
 import { PurchaselySubscriptionsServiceInterface as SubscriptionsService } from "../purchasely-subscriptions/service";
 import { FirebaseCustomClaimsServiceInterface as CustomClaimsService } from "../firebase-custom-claims/service";
 import {
-  PurchaselyAppPlatform,
-  PurchaselyEventDomain,
-  PurchaselyStore
+  PurchaselyEventDomain
 } from "../purchasely-events/domain";
 import { DateTime } from "luxon";
 import { v4 as uuid } from "uuid";
@@ -18,6 +16,7 @@ import { PurchaselyEventName } from "../purchasely-events/domain/purchasely-even
 import { PurchaselyFirebaseCustomClaimsDomain } from "../firebase-custom-claims/domain/purchasely-firebase-custom-claims.domain";
 
 import { Services } from "../../utils/types/services.type"
+import { appPlatformFromStore } from "../../utils/types/app-platform";
 
 export const saveSubscriptionEvent = (service: EventsService | null) => (webhook: PurchaselySubscriptionWebhookDomain): Promise<PurchaselyEventDomain | null> => {
   if (service === null) {
@@ -50,9 +49,6 @@ export const saveFirebaseCustomClaims = (service: CustomClaimsService | null) =>
   if (webhook.user_id === undefined) {
     return Promise.resolve(null);
   }
-  if (webhook.plan === undefined) {
-    return Promise.resolve(null);
-  }
 
   const customClaims: PurchaselyFirebaseCustomClaimsDomain[] = [{
     product: webhook.product,
@@ -70,9 +66,6 @@ export const saveSubscription = (service: SubscriptionsService | null) => (webho
     return Promise.resolve(null);
   }
   else if (webhook.event_name !== PurchaselyEventName.ACTIVATE && webhook.event_name !== PurchaselyEventName.DEACTIVATE) {
-    return Promise.resolve(null);
-  }
-  if (webhook.plan === undefined) {
     return Promise.resolve(null);
   }
   if (webhook.event_name === PurchaselyEventName.ACTIVATE && webhook.effective_next_renewal_at === undefined) {
@@ -97,7 +90,7 @@ export const saveSubscription = (service: SubscriptionsService | null) => (webho
         }
       },
       app: {
-        platform: webhook.store === PurchaselyStore.APPLE_APP_STORE ? PurchaselyAppPlatform.IOS : PurchaselyAppPlatform.ANDROID,
+        platform: appPlatformFromStore(webhook.store),
         package_id: webhook.store_app_bundle_id
       },
       expires_at: DateTime.fromISO(webhook.effective_next_renewal_at as string),

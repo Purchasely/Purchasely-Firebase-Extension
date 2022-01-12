@@ -16,6 +16,7 @@ export const eventsFactory: () => PurchaselyEventDomain = () => ({
   event_name: PurchaselyEventName.ACTIVATE,
   event_created_at: DateTime.now(),
   event_created_at_ms: DateTime.now().toMillis(),
+  plan: uuid(),
   product: uuid(),
   purchase_type: PurchaselyProductPlanType.RENEWING_SUBSCRIPTION,
   purchased_at: DateTime.now().minus({ minutes: 5 }),

@@ -6,17 +6,16 @@ import { PurchaselyWebhookDtoSchema } from "./dto/webhook.dto";
 import { PurchaselyEventsServiceInterface as EventsService } from "../purchasely-events/service";
 import { PurchaselyConsumablesServiceInterface as ConsumablesService } from "../purchasely-consumables/service";
 import {
-  PurchaselyAppPlatform,
   PurchaselyEventDomain,
   PurchaselyEventName,
   PurchaselyProductPlanType,
-  PurchaselyStore
 } from "../purchasely-events/domain";
 import { DateTime } from "luxon";
 import { v4 as uuid } from "uuid";
 import { PurchaselyConsumableDomain } from "../purchasely-consumables/domain/purchasely-consumable.domain";
 
 import { Services } from "../../utils/types/services.type"
+import { appPlatformFromStore } from "../../utils/types/app-platform";
 
 export const saveConsumableEvent = (service: EventsService | null) => (webhook: PurchaselyConsumableWebhookDomain): Promise<PurchaselyEventDomain | null> => {
   if (service === null) {
@@ -43,9 +42,6 @@ export const saveConsumable = (service: ConsumablesService | null) => (webhook: 
   else if (webhook.event_name !== PurchaselyEventName.ACTIVATE) {
     return Promise.resolve(null);
   }
-  if (webhook.plan === undefined) {
-    return Promise.resolve(null);
-  }
 
   const consumable: PurchaselyConsumableDomain = {
     id: uuid(),
@@ -61,7 +57,7 @@ export const saveConsumable = (service: ConsumablesService | null) => (webhook: 
         }
       },
       app: {
-        platform: webhook.store === PurchaselyStore.APPLE_APP_STORE ? PurchaselyAppPlatform.IOS : PurchaselyAppPlatform.ANDROID,
+        platform: appPlatformFromStore(webhook.store),
         package_id: webhook.store_app_bundle_id
       },
       purchased_at: DateTime.fromISO(webhook.purchased_at),

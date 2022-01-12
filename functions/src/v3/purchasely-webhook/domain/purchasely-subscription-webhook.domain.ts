@@ -26,7 +26,7 @@ export interface PurchaselySubscriptionWebhookDomain {
   next_renewal_at_ms?: number;
   original_purchased_at: string;
   original_purchased_at_ms: number;
-  plan?: string;
+  plan: string;
   offer_type: PurchaselyOfferType;
   previous_offer_type?: PurchaselyOfferType;
   previous_plan?: string;
