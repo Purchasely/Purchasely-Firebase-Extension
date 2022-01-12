@@ -10,7 +10,11 @@ service cloud.firestore {
       allow read: if request.auth.uid == resource.data.user.vendor_id;
     }
 
-    match /${param:PURCHASELY_EVENTS_COLLECTION}/{documentId} {
+    match /${param:PURCHASELY_EVENTS_COLLECTION_2}/{documentId} {
+      allow read: if request.auth.uid == resource.data.user.vendor_id;
+    }
+
+    match /${param:PURCHASELY_EVENTS_COLLECTION_3}/{documentId} {
       allow read: if request.auth.uid == resource.data.user.vendor_id;
     }
   }
@@ -25,13 +29,12 @@ You need to set up the webhook that sends your users' In-App Purchases & Subscri
 
 Here's how to set up the Client webhook URL:
 
-   1. Go to the [Purchasely Console](https://console.purchasely.io/).
+1.  Go to the [Purchasely Console](https://console.purchasely.io/).
 
-   1. Use the URL of your extension's function as the endpoint URL. 
-      Here's your function's URL: `${function:purchaselyWebhookHandler.url}`
+1.  Use the URL of your extension's function as the endpoint URL.
+    Here's your function's URL: `${function:purchaselyWebhookHandler.url}`
 
-   1. Set it in your Purchasely Console (Purchasely Console > Applications > [YOUR APP] > App Settings > Backend & SDK configuration > Client webhook URL
-
+1.  Set it in your Purchasely Console (Purchasely Console > Applications > [YOUR APP] > App Settings > Backend & SDK configuration > Client webhook URL
 
 ### Using the extension
 
@@ -47,19 +50,25 @@ The quickest way to sign-up new users is by using the [Firebase Authentication S
 Users' subscriptions are normal collections and docs in your Cloud Firestore and can be queried as such:
 
 Javascript:
+
 ```js
-db.collection('${param:PURCHASELY_SUBSCRIPTIONS_COLLECTION}')
-  .where('is_subscribed', '==', true)
-  .whereField('user.vendor_id', '==', '$CURRENT_USER_FIRESTORE_AUTHENTICATION_ID')
+db.collection("${param:PURCHASELY_SUBSCRIPTIONS_COLLECTION}")
+  .where("is_subscribed", "==", true)
+  .whereField(
+    "user.vendor_id",
+    "==",
+    "$CURRENT_USER_FIRESTORE_AUTHENTICATION_ID"
+  )
   .get()
   .then(function (querySnapshot) {
     querySnapshot.forEach(async function (doc) {
-      console.log(doc.id, ' => ', doc.data());
+      console.log(doc.id, " => ", doc.data());
     });
   });
 ```
 
 Swift:
+
 ```swift
 firestore.collection('${param:PURCHASELY_SUBSCRIPTIONS_COLLECTION}')
   .whereField('is_subscribed', '==', true)
@@ -77,18 +86,24 @@ firestore.collection('${param:PURCHASELY_SUBSCRIPTIONS_COLLECTION}')
 Users' consumables are normal collections and docs in your Cloud Firestore and can be queried as such:
 
 Javascript:
+
 ```js
-db.collection('${param:PURCHASELY_CONSUMABLES_COLLECTION}')
-  .whereField('user.vendor_id', '==', '$CURRENT_USER_FIRESTORE_AUTHENTICATION_ID')
+db.collection("${param:PURCHASELY_CONSUMABLES_COLLECTION}")
+  .whereField(
+    "user.vendor_id",
+    "==",
+    "$CURRENT_USER_FIRESTORE_AUTHENTICATION_ID"
+  )
   .get()
   .then(function (querySnapshot) {
     querySnapshot.forEach(async function (doc) {
-      console.log(doc.id, ' => ', doc.data());
+      console.log(doc.id, " => ", doc.data());
     });
   });
 ```
 
 Swift:
+
 ```swift
 firestore.collection('${param:PURCHASELY_CONSUMABLES_COLLECTION}')
   .whereField('user.vendor_id', '==', '$CURRENT_USER_FIRESTORE_AUTHENTICATION_ID')
@@ -105,18 +120,24 @@ firestore.collection('${param:PURCHASELY_CONSUMABLES_COLLECTION}')
 Users' non-consumables are normal collections and docs in your Cloud Firestore and can be queried as such:
 
 Javascript:
+
 ```js
-db.collection('${param:PURCHASELY_NON_CONSUMABLES_COLLECTION}')
-  .whereField('user.vendor_id', '==', '$CURRENT_USER_FIRESTORE_AUTHENTICATION_ID')
+db.collection("${param:PURCHASELY_NON_CONSUMABLES_COLLECTION}")
+  .whereField(
+    "user.vendor_id",
+    "==",
+    "$CURRENT_USER_FIRESTORE_AUTHENTICATION_ID"
+  )
   .get()
   .then(function (querySnapshot) {
     querySnapshot.forEach(async function (doc) {
-      console.log(doc.id, ' => ', doc.data());
+      console.log(doc.id, " => ", doc.data());
     });
   });
 ```
 
 Swift:
+
 ```swift
 firestore.collection('${param:PURCHASELY_NON_CONSUMABLES_COLLECTION}')
   .whereField('user.vendor_id', '==', '$CURRENT_USER_FIRESTORE_AUTHENTICATION_ID')
