@@ -18,7 +18,7 @@ const firestore = admin.firestore();
 
 const purchaselyServices = PurchaselyServices(PurchaselyConfig)(auth, firestore);
 
-const payloadVersionForRequest: (request: Request) => Promise<PurchaselyAPIVersions> = (request: Request) => {
+const payloadVersionForRequest: (request: Request) => PurchaselyAPIVersions = (request: Request) => {
   if (!request.body.api_version) {
     return PurchaselyAPIVersions.v2;
   }
