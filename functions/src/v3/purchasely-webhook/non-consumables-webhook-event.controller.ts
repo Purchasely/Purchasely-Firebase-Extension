@@ -14,7 +14,7 @@ import { DateTime } from "luxon";
 import { v4 as uuid } from "uuid";
 import { PurchaselyNonConsumableDomain } from "../purchasely-non-consumables/domain/purchasely-non-consumable.domain";
 
-import { Services } from "../../utils/types/services.type"
+import { Services } from "../services.type"
 import { appPlatformFromStore } from "../../utils/types/app-platform";
 
 export const deleteNonConsumable = (service: NonConsumablesService | null) => (webhook: PurchaselyNonConsumableWebhookDomain): Promise<void> => {
@@ -97,7 +97,7 @@ export const purchaselyNonConsumableEventController = (ajv: Ajv) => (services: S
   const requestDto = request.body as PurchaselyNonConsumableWebhookDomain;
 
   return Promise.all([
-    deleteNonConsumable(services.events)(requestDto)
+    deleteNonConsumable(services.nonConsumables)(requestDto)
     .catch((error) => {
       services.logs.logger.error("Events Destination Failed, with: ", error);
       return Promise.reject(error);

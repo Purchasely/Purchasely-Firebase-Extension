@@ -10,7 +10,7 @@ import { DateTime } from "luxon";
 import { v4 as uuid } from "uuid";
 import { PurchaselyConsumableDomain } from "../purchasely-consumables/domain/purchasely-consumable.domain";
 
-import { Services } from "../../utils/types/services.type"
+import { Services } from "../services.type"
 
 export const saveConsumableEvent = (service: EventsService | null) => (webhook: PurchaselyConsumableWebhookDomain): Promise<PurchaselyEventDomain | null> => {
   if (service === null) {
