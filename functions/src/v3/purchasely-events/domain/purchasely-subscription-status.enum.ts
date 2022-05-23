@@ -6,4 +6,5 @@ export enum PurchaselySubscriptionStatus {
   DEACTIVATED = "DEACTIVATED",
   REVOKED = "REVOKED",
   PAUSED = "PAUSED",
+  UNPAID = "UNPAID"
 }
