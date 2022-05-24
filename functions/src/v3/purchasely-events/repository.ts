@@ -22,6 +22,7 @@ export const PurchaselyEventsRepository = (collectionName: string) => (db: Fireb
           next_renewal_at: item.next_renewal_at === undefined ? null : item.next_renewal_at.toJSDate(),
           original_purchased_at: item.original_purchased_at === undefined ? null : item.original_purchased_at.toJSDate(),
           purchased_at: item.purchased_at.toJSDate(),
+          store_country: item.store_country === undefined ? null : item.store_country
         })
         .then(() => item);
     },
