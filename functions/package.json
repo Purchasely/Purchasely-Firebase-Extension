@@ -5,7 +5,7 @@
     "lint:fix": "eslint '**/*.ts' --fix",
     "prettier": "prettier -c .",
     "prettier:fix": "prettier --write .",
-    "build": "tsc",
+    "build": "tsc --build tsconfig.json",
     "serve": "npm run build && firebase serve --only functions",
     "shell": "npm run build && firebase functions:shell",
     "start": "npm run shell",
