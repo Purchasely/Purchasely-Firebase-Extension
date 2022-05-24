@@ -42,7 +42,7 @@ export interface PurchaselyEventDomain {
   purchasely_subscription_id?: string;
   store: PurchaselyStore;
   store_app_bundle_id: string;
-  store_country: string | null;
+  store_country?: string | null;
   store_original_transaction_id: string;
   store_product_id: string;
   store_transaction_id: string;

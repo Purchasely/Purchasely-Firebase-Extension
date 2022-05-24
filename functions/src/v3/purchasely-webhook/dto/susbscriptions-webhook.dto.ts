@@ -158,7 +158,6 @@ export const PurchaselySubscriptionsWebhookDtoSchema = {
     "purchased_at_ms",
     "store",
     "store_app_bundle_id",
-    "store_country",
     "store_original_transaction_id",
     "store_product_id",
     "store_transaction_id",
