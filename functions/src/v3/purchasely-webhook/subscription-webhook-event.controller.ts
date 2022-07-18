@@ -9,14 +9,17 @@ import { FirebaseCustomClaimsServiceInterface as CustomClaimsService } from "../
 import {
   PurchaselyEventDomain
 } from "../purchasely-events/domain";
-import { DateTime } from "luxon";
-import { v4 as uuid } from "uuid";
 import { PurchaselySubscriptionDomain } from "../purchasely-subscriptions/domain/purchasely-subscription.domain";
 import { PurchaselyEventName } from "../purchasely-events/domain/purchasely-event-name.enum";
 import { PurchaselyFirebaseCustomClaimsDomain } from "../firebase-custom-claims/domain/purchasely-firebase-custom-claims.domain";
 
 import { Services } from "../services.type"
 import { appPlatformFromStore } from "../../utils/types/app-platform";
+import {
+  purchaselyEventPropertiesMapper,
+  purchaselyWebhookToEventMapper
+ } from "./properties-mapper"
+import { DateTime } from "luxon";
 
 export const saveSubscriptionEvent = (service: EventsService | null) => (webhook: PurchaselySubscriptionWebhookDomain): Promise<PurchaselyEventDomain | null> => {
   if (service === null) {
@@ -24,20 +27,7 @@ export const saveSubscriptionEvent = (service: EventsService | null) => (webhook
     return Promise.resolve(null);
   }
 
-  const dateFromOptionalDateString = (dateString?: string): DateTime | undefined => dateString === undefined ? undefined : DateTime.fromISO(dateString);
-
-  var event: PurchaselyEventDomain = {
-    id: uuid(),
-    ...webhook,
-    auto_resume_at: dateFromOptionalDateString(webhook.auto_resume_at),
-    defer_end_at: dateFromOptionalDateString(webhook.defer_end_at),
-    event_created_at: DateTime.fromISO(webhook.event_created_at),
-    effective_next_renewal_at: dateFromOptionalDateString(webhook.effective_next_renewal_at),
-    grace_period_expires_at: dateFromOptionalDateString(webhook.grace_period_expires_at),
-    next_renewal_at: dateFromOptionalDateString(webhook.next_renewal_at),
-    original_purchased_at: dateFromOptionalDateString(webhook.original_purchased_at),
-    purchased_at: DateTime.fromISO(webhook.purchased_at),
-  };
+  const event: PurchaselyEventDomain = purchaselyWebhookToEventMapper(webhook);
   return service.create(event.id, event);
 };
 
@@ -79,7 +69,8 @@ export const saveSubscription = (service: SubscriptionsService | null) => (webho
   const subscription: PurchaselySubscriptionDomain = {
     id: `${userId}-${webhook.product}`,
     user: {
-      vendor_id: webhook.user_id
+      anonymous_id: purchaselyEventPropertiesMapper("anonymous_id", webhook.anonymous_user_id),
+      vendor_id: purchaselyEventPropertiesMapper("user_id", webhook.user_id)
     },
     properties: {
       product: {
@@ -93,11 +84,11 @@ export const saveSubscription = (service: SubscriptionsService | null) => (webho
         platform: appPlatformFromStore(webhook.store),
         package_id: webhook.store_app_bundle_id
       },
-      expires_at: DateTime.fromISO(webhook.effective_next_renewal_at as string),
-      purchased_at: DateTime.fromISO(webhook.purchased_at),
+      expires_at: <DateTime>purchaselyEventPropertiesMapper("expires_at", webhook.effective_next_renewal_at as string),
+      purchased_at: <DateTime>purchaselyEventPropertiesMapper("purchased_at", webhook.purchased_at)
     },
     is_subscribed: webhook.event_name === PurchaselyEventName.ACTIVATE,
-    received_at: DateTime.fromISO(webhook.event_created_at),
+    received_at: <DateTime>purchaselyEventPropertiesMapper("received_at", webhook.event_created_at)
   };
 
   return service.create(subscription.id, subscription);

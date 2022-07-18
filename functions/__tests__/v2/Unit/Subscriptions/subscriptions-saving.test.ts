@@ -41,7 +41,7 @@ test("Subscriptions Service Creation method is invoked with the proper subscript
     ...factoryService,
     create: (id: string, subscriptionToCreate: PurchaselySubscriptionDomain) => {
       t.is(typeof subscriptionToCreate.id, "string");
-      t.deepEqual(subscriptionToCreate.user, event.user);
+      t.deepEqual(subscriptionToCreate.user, { anonymous_id: event.user.anonymous_id ?? null, vendor_id: event.user.vendor_id ?? null });
       t.deepEqual(subscriptionToCreate.properties.product, event.properties.product);
       t.deepEqual(subscriptionToCreate.properties.app, event.properties.app);
       t.is(subscriptionToCreate.properties.expires_at.toISO(), DateTime.fromISO(event.properties.expires_at).toISO());
@@ -63,7 +63,7 @@ test("Subscriptions Service Creation method is invoked with a non subscribed sub
     create: (id: string, subscriptionToCreate: PurchaselySubscriptionDomain) => {
       t.is(subscriptionToCreate.id, `${event.user.vendor_id}-${event.properties.product.vendor_id}`);
       t.is(id, subscriptionToCreate.id);
-      t.deepEqual(subscriptionToCreate.user, event.user);
+      t.deepEqual(subscriptionToCreate.user, { anonymous_id: event.user.anonymous_id ?? null, vendor_id: event.user.vendor_id ?? null });
       t.deepEqual(subscriptionToCreate.properties.product, event.properties.product);
       t.deepEqual(subscriptionToCreate.properties.app, event.properties.app);
       t.is(subscriptionToCreate.properties.expires_at.toISO(), DateTime.fromISO(event.properties.expires_at).toISO());

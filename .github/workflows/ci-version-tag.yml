@@ -1,8 +1,8 @@
-name: Deploy Master Branch
+name: Deploy On New Version Tag
 on:
   push:
-    branches:
-      - master
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
 
 jobs:
   build:
@@ -143,7 +143,9 @@ jobs:
           cat .extension-params.env
       - name: Publish
         run: |
-          echo "NOT ACTUALLY PUBLISHING THE FIREBASE EXTENSION UPDATE"
+          echo "PUBLISHING THE FIREBASE EXTENSION UPDATE"
+          yarn run firebase ext:dev:publish purchasely/purchasely-in-app-purchases --token $(FIREBASE_TOKEN) --non-interactive --force
+          echo "PUBLISHED THE FIREBASE EXTENSION UPDATE"
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
           PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}

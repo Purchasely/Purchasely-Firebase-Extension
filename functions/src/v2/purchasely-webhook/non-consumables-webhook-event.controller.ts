@@ -21,6 +21,10 @@ export const saveNonConsumableEvent = (service: EventsService | null) => (webhoo
   var event: PurchaselyEventDomain = {
     id: uuid(),
     ...webhook,
+    user: {
+      anonymous_id: webhook.user.anonymous_id ?? null,
+      vendor_id: webhook.user.vendor_id ?? null,
+    },
     properties: {
       ...webhook.properties,
       purchased_at: DateTime.fromISO(webhook.properties.purchased_at),
@@ -37,7 +41,10 @@ export const saveNonConsumable = (service: NonConsumablesService | null) => (web
 
   const nonConsumable: PurchaselyNonConsumableDomain = {
     id: uuid(),
-    user: webhook.user,
+    user: {
+      anonymous_id: webhook.user.anonymous_id ?? null,
+      vendor_id: webhook.user.vendor_id ?? null,
+    },
     properties: {
       product: webhook.properties.product,
       app: webhook.properties.app,

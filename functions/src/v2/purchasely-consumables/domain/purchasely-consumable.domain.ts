@@ -7,8 +7,8 @@ import { PurchaselyProductPlanType } from "../../purchasely-events/domain/purcha
 export interface PurchaselyConsumableDomain {
   id: UUID;
   user: {
-    anonymous_id?: string;
-    vendor_id?: string;
+    anonymous_id: string | null;
+    vendor_id: string | null;
   };
   properties: {
     product: {
