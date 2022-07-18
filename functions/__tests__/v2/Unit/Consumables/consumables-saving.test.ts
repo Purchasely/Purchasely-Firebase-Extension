@@ -41,7 +41,7 @@ test("Consumable Service Creation method is invoked with the proper consumable",
     ...factoryService,
     create: (id: string, consumableToCreate: PurchaselyConsumableDomain) => {
       t.is(typeof consumableToCreate.id, "string");
-      t.deepEqual(consumableToCreate.user, event.user);
+      t.deepEqual(consumableToCreate.user, { anonymous_id: event.user.anonymous_id ?? null, vendor_id: event.user.vendor_id ?? null });
       t.deepEqual(consumableToCreate.properties.product, event.properties.product);
       t.deepEqual(consumableToCreate.properties.app, event.properties.app);
       t.is(consumableToCreate.properties.purchased_at.toISO(), DateTime.fromISO(event.properties.purchased_at).toISO());

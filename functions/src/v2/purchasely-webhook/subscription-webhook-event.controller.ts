@@ -24,6 +24,10 @@ export const saveSubscriptionEvent = (service: EventsService | null) => (webhook
   var event: PurchaselyEventDomain = {
     id: uuid(),
     ...webhook,
+    user: {
+      anonymous_id: webhook.user.anonymous_id ?? null,
+      vendor_id: webhook.user.vendor_id ?? null,
+    },
     properties: {
       ...webhook.properties,
       expires_at: webhook.properties.expires_at === undefined ? undefined : DateTime.fromISO(webhook.properties.expires_at),
@@ -67,7 +71,10 @@ export const saveSubscription = (service: SubscriptionsService | null) => (webho
 
   const subscription: PurchaselySubscriptionDomain = {
     id: `${userId}-${webhook.properties.product.vendor_id}`,
-    user: webhook.user,
+    user: {
+      anonymous_id: webhook.user.anonymous_id ?? null,
+      vendor_id: webhook.user.vendor_id ?? null,
+    },
     properties: {
       product: webhook.properties.product,
       app: webhook.properties.app,

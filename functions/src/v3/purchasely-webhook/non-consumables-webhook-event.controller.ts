@@ -11,11 +11,14 @@ import {
   PurchaselyProductPlanType
 } from "../purchasely-events/domain";
 import { DateTime } from "luxon";
-import { v4 as uuid } from "uuid";
 import { PurchaselyNonConsumableDomain } from "../purchasely-non-consumables/domain/purchasely-non-consumable.domain";
 
 import { Services } from "../services.type"
 import { appPlatformFromStore } from "../../utils/types/app-platform";
+import {
+  purchaselyEventPropertiesMapper,
+  purchaselyWebhookToEventMapper
+ } from "./properties-mapper"
 
 export const deleteNonConsumable = (service: NonConsumablesService | null) => (webhook: PurchaselyNonConsumableWebhookDomain): Promise<void> => {
   if (service === null) {
@@ -41,15 +44,7 @@ export const saveNonConsumableEvent = (service: EventsService | null) => (webhoo
     return Promise.resolve(null);
   }
 
-  const dateFromOptionalDateString = (dateString?: string): DateTime | undefined => dateString === undefined ? undefined : DateTime.fromISO(dateString);
-
-  var event: PurchaselyEventDomain = {
-    id: uuid(),
-    ...webhook,
-    event_created_at: DateTime.fromISO(webhook.event_created_at),
-    original_purchased_at: dateFromOptionalDateString(webhook.original_purchased_at),
-    purchased_at: DateTime.fromISO(webhook.purchased_at),
-  };
+  const event: PurchaselyEventDomain = purchaselyWebhookToEventMapper(webhook);
   return service.create(event.id, event);
 };
 
@@ -69,7 +64,8 @@ export const saveNonConsumable = (service: NonConsumablesService | null) => (web
   const nonConsumable: PurchaselyNonConsumableDomain = {
     id: `${userId}-${webhook.product}`,
     user: {
-      vendor_id: webhook.user_id
+      anonymous_id: null,
+      vendor_id: <string>purchaselyEventPropertiesMapper("user_id", webhook.user_id)
     },
     properties: {
       product: {
@@ -83,9 +79,9 @@ export const saveNonConsumable = (service: NonConsumablesService | null) => (web
         platform: appPlatformFromStore(webhook.store),
         package_id: webhook.store_app_bundle_id
       },
-      purchased_at: DateTime.fromISO(webhook.purchased_at),
+      purchased_at: <DateTime>purchaselyEventPropertiesMapper("purchased_at", webhook.purchased_at)
     },
-    received_at: DateTime.fromISO(webhook.event_created_at),
+    received_at: <DateTime>purchaselyEventPropertiesMapper("received_at", webhook.event_created_at)
   };
   return service.create(nonConsumable.id, nonConsumable);
 };
