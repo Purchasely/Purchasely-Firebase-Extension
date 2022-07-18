@@ -9,6 +9,7 @@ import { PurchaselyAppPlatform } from "../../../../src/v2/purchasely-events/doma
 export const subscriptionsFactory: () => PurchaselySubscriptionDomain = () => ({
   id: uuid(),
   user: {
+    anonymous_id: null,
     vendor_id: uuid(),
   },
   properties: {

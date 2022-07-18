@@ -42,7 +42,7 @@ test("Events Service Creation method is invoked with the proper event", async t 
     create: (id: string, eventToCreate: PurchaselyEventDomain) => {
       t.is(typeof eventToCreate.id, "string");
       t.is(eventToCreate.name, event.name);
-      t.deepEqual(eventToCreate.user, event.user);
+      t.deepEqual(eventToCreate.user, { anonymous_id: event.user.anonymous_id ?? null, vendor_id: event.user.vendor_id ?? null});;
       t.deepEqual(eventToCreate.properties.product, event.properties.product);
       t.is(eventToCreate.properties.store, event.properties.store);
       t.deepEqual(eventToCreate.properties.app, event.properties.app);

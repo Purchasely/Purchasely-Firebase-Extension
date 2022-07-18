@@ -8,8 +8,8 @@ export interface PurchaselyEventDomain {
   id: UUID;
   name: string;
   user: {
-    anonymous_id?: string;
-    vendor_id?: string;
+    anonymous_id: string | null;
+    vendor_id: string | null;
   };
   properties: {
     product: {

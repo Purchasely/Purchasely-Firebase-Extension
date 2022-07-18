@@ -14,15 +14,15 @@ export const PurchaselyEventsRepository = (collectionName: string) => (db: Fireb
         .doc(id)
         .set({
           ...item,
-          auto_resume_at: item.auto_resume_at === undefined ? null : item.auto_resume_at.toJSDate(),
-          defer_end_at: item.defer_end_at === undefined ? null : item.defer_end_at.toJSDate(),
+          auto_resume_at: item.auto_resume_at === null ? null : item.auto_resume_at.toJSDate(),
+          defer_end_at: item.defer_end_at === null ? null : item.defer_end_at.toJSDate(),
           event_created_at: item.event_created_at.toJSDate(),
-          effective_next_renewal_at: item.effective_next_renewal_at === undefined ? null : item.effective_next_renewal_at.toJSDate(),
-          grace_period_expires_at: item.grace_period_expires_at === undefined ? null : item.grace_period_expires_at.toJSDate(),
-          next_renewal_at: item.next_renewal_at === undefined ? null : item.next_renewal_at.toJSDate(),
-          original_purchased_at: item.original_purchased_at === undefined ? null : item.original_purchased_at.toJSDate(),
+          effective_next_renewal_at: item.effective_next_renewal_at === null ? null : item.effective_next_renewal_at.toJSDate(),
+          grace_period_expires_at: item.grace_period_expires_at === null ? null : item.grace_period_expires_at.toJSDate(),
+          next_renewal_at: item.next_renewal_at === null ? null : item.next_renewal_at.toJSDate(),
+          original_purchased_at: item.original_purchased_at === null ? null : item.original_purchased_at.toJSDate(),
           purchased_at: item.purchased_at.toJSDate(),
-          store_country: item.store_country === undefined ? null : item.store_country
+          store_country: item.store_country === null ? null : item.store_country
         })
         .then(() => item);
     },

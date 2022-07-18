@@ -12,6 +12,7 @@ export const eventsFactory: () => PurchaselyEventDomain = () => ({
   id: uuid(),
   name: PurchaselyEventName.PURCHASE_VALIDATED,
   user: {
+    anonymous_id: null,
     vendor_id: uuid(),
   },
   properties: {

@@ -41,7 +41,7 @@ test("NonConsumable Service Creation method is invoked with the proper nonConsum
     ...factoryService,
     create: (id: string, nonConsumableToCreate: PurchaselyNonConsumableDomain) => {
       t.is(typeof nonConsumableToCreate.id, "string");
-      t.deepEqual(nonConsumableToCreate.user, event.user);
+      t.deepEqual(nonConsumableToCreate.user, { anonymous_id: event.user.anonymous_id ?? null, vendor_id: event.user.vendor_id ?? null });
       t.deepEqual(nonConsumableToCreate.properties.product, event.properties.product);
       t.deepEqual(nonConsumableToCreate.properties.app, event.properties.app);
       t.is(nonConsumableToCreate.properties.purchased_at.toISO(), DateTime.fromISO(event.properties.purchased_at).toISO());
