@@ -143,7 +143,9 @@ jobs:
           cat .extension-params.env
       - name: Deploy to Purchasely's Firebase Project
         run: |
-          echo "NOT ACTUALLY DEPLOYING THE FIREBASE EXTENSION TO PURCHASELY'S PROJECT" # ./auto-extension-update.exp ${PWD##*/}
+          echo "DEPLOYING THE FIREBASE EXTENSION TO PURCHASELY'S PROJECT"
+          yarn run firebase ext:install ./ --params ./.extension-params.env --project $(PROJECT_ID) --token $(FIREBASE_TOKEN) --non-interactive --force
+          echo "DEPLOYED THE FIREBASE EXTENSION TO PURCHASELY'S PROJECT"
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
           PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
