@@ -82,10 +82,7 @@ jobs:
           cd ../
       - name: Run tests with mocks
         run: |
-          firebase emulators:start --only firestore &
-          cd ./functions
-          yarn run test
-          cd ../
+          firebase emulators:exec --only firestore "cd ./functions && yarn test && cd ../"
         env:
           FIRESTORE_EMULATOR_HOST: "localhost:8080"
       - name: Archive Extension Coverage
