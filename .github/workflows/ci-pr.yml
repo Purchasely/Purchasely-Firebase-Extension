@@ -40,6 +40,7 @@ jobs:
           name: latest-develop-artifact
           retention-days: 30
           path: |
+            .extension-params.env
             auto-extension-install.exp
             auto-extension-update.exp
             extension.yaml

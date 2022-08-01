@@ -40,6 +40,7 @@ jobs:
           name: latest-production-artifact
           retention-days: 30
           path: |
+            .extension-params.env
             auto-extension-install.exp
             auto-extension-update.exp
             extension.yaml
@@ -141,8 +142,8 @@ jobs:
       - name: Publish
         run: |
           echo "PUBLISHING THE FIREBASE EXTENSION UPDATE"
-          yarn run firebase ext:dev:publish purchasely/purchasely-in-app-purchases --token $(FIREBASE_TOKEN) --non-interactive --force
+          yarn run firebase ext:dev:publish purchasely/purchasely-in-app-purchases --token $FIREBASE_TOKEN --project $PROJECT_ID --non-interactive --force
           echo "PUBLISHED THE FIREBASE EXTENSION UPDATE"
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-          PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
+          FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}

@@ -40,6 +40,7 @@ jobs:
           name: latest-develop-artifact
           retention-days: 30
           path: |
+            .extension-params.env
             auto-extension-install.exp
             auto-extension-update.exp
             extension.yaml
@@ -104,7 +105,7 @@ jobs:
       - name: Archive Extension Coverage
         run: echo "Upload the extension's test coverage"
   deploy:
-    name: Deploy (STAND-IN; NOT ACTUALLY IMPLEMENTED)
+    name: Deploy
     runs-on: ubuntu-latest
     needs: test
     steps:
@@ -136,13 +137,13 @@ jobs:
         env:
           PURCHASELY_SHARED_SECRET: ${{ secrets.PURCHASELY_SHARED_SECRET }}
         run: |
-          echo PURCHASELY_SHARED_SECRET=$PURCHASELY_SHARED_SECRET >> .extension-params.env
+          echo "PURCHASELY_SHARED_SECRET=$PURCHASELY_SHARED_SECRET" >> .extension-params.env
           cat .extension-params.env
       - name: Deploy to Purchasely's Firebase Project
         run: |
           echo "DEPLOYING THE FIREBASE EXTENSION TO PURCHASELY'S PROJECT"
-          yarn run firebase ext:install ./ --params ./.extension-params.env --project $(PROJECT_ID) --token $(FIREBASE_TOKEN) --non-interactive --force
+          yarn run firebase ext:install ./ --params ./.extension-params.env --project $FIREBASE_PROJECT_ID --token $FIREBASE_TOKEN --non-interactive --force
           echo "DEPLOYED THE FIREBASE EXTENSION TO PURCHASELY'S PROJECT"
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-          PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
+          FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
