@@ -44,7 +44,20 @@ export const saveNonConsumableEvent = (service: EventsService | null) => (webhoo
     return Promise.resolve(null);
   }
 
-  const event: PurchaselyEventDomain = purchaselyWebhookToEventMapper(webhook);
+  const event: PurchaselyEventDomain = purchaselyWebhookToEventMapper({
+    anonymous_user_id: undefined,
+    content_id: undefined,
+    is_family_shared: undefined,
+    purchasely_one_time_purchase_id: undefined,
+    store_country: undefined,
+    subscription_status: undefined,
+    transferred_from_user_id: undefined,
+    transferred_to_user_id: undefined,
+    transferred_from_anonymous_user_id: undefined,
+    transferred_to_anonymous_user_id: undefined,
+    user_id: undefined,
+    ...webhook
+  });
   return service.create(event.id, event);
 };
 

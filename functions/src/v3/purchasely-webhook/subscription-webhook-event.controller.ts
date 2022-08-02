@@ -27,7 +27,31 @@ export const saveSubscriptionEvent = (service: EventsService | null) => (webhook
     return Promise.resolve(null);
   }
 
-  const event: PurchaselyEventDomain = purchaselyWebhookToEventMapper(webhook);
+  const event: PurchaselyEventDomain = purchaselyWebhookToEventMapper({
+    anonymous_user_id: undefined,
+    auto_resume_at: undefined,
+    auto_resume_at_ms: undefined,
+    content_id: undefined,
+    defer_end_at: undefined,
+    defer_end_at_ms: undefined,
+    effective_next_renewal_at: undefined,
+    effective_next_renewal_at_ms: undefined,
+    grace_period_expires_at: undefined,
+    grace_period_expires_at_ms: undefined,
+    is_family_shared: undefined,
+    next_renewal_at: undefined,
+    next_renewal_at_ms: undefined,
+    previous_offer_type: undefined,
+    previous_plan: undefined,
+    store_country: undefined,
+    subscription_status: undefined,
+    transferred_from_user_id: undefined,
+    transferred_to_user_id: undefined,
+    transferred_from_anonymous_user_id: undefined,
+    transferred_to_anonymous_user_id: undefined,
+    user_id: undefined,
+    ...webhook
+  });
   return service.create(event.id, event);
 };
 
