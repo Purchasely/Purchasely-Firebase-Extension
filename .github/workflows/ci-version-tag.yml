@@ -41,8 +41,6 @@ jobs:
           retention-days: 30
           path: |
             .extension-params.env
-            auto-extension-install.exp
-            auto-extension-update.exp
             extension.yaml
             firebase.json
             package.json
