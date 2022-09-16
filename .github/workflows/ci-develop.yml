@@ -123,9 +123,6 @@ jobs:
       - name: Install Firebase
         run: |
           yarn install
-          yarn global add firebase-tools
-      - name: Install Expect
-        run: sudo apt-get install expect
       - name: Install Dependencies
         run: |
           cd ./functions

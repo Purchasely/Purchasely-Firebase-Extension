@@ -73,7 +73,6 @@ jobs:
       - name: Install Firebase
         run: |
           yarn install
-          yarn global add firebase-tools
       - name: Install Dependencies
         run: |
           cd ./functions
