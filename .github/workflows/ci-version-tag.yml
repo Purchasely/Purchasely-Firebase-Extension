@@ -131,16 +131,10 @@ jobs:
           cd ./functions
           yarn install
           cd ../
-      - name: Export Client Webhook Shared Secret to Extension Params File
-        env:
-          PURCHASELY_SHARED_SECRET: ${{ secrets.PURCHASELY_SHARED_SECRET }}
-        run: |
-          echo PURCHASELY_SHARED_SECRET=$PURCHASELY_SHARED_SECRET >> .extension-params.env
-          cat .extension-params.env
       - name: Publish
         run: |
           echo "PUBLISHING THE FIREBASE EXTENSION UPDATE"
-          yarn run firebase ext:dev:publish purchasely/purchasely-in-app-purchases --token $FIREBASE_TOKEN --project $PROJECT_ID --non-interactive --force
+          yarn run firebase ext:dev:publish purchasely/purchasely-in-app-purchases --token $FIREBASE_TOKEN --project $PROJECT_ID --non-interactive
           echo "PUBLISHED THE FIREBASE EXTENSION UPDATE"
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
