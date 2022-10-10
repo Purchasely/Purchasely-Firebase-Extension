@@ -43,6 +43,7 @@ jobs:
             extension.yaml
             firebase.json
             package.json
+            CHANGELOG.md
             POSTINSTALL.md
             PREINSTALL.md
             functions/src
@@ -131,8 +132,8 @@ jobs:
       - name: Publish
         run: |
           echo "PUBLISHING THE FIREBASE EXTENSION UPDATE"
-          yarn run firebase --open-sesame ext
-          yarn run firebase ext:dev:publish purchasely/purchasely-in-app-purchases --token $FIREBASE_TOKEN --project $PROJECT_ID --non-interactive
+          yarn run firebase --open-sesame extdev
+          yarn run firebase ext:dev:publish purchasely/purchasely-in-app-purchases --token $FIREBASE_TOKEN --project $PROJECT_ID --non-interactive --force
           echo "PUBLISHED THE FIREBASE EXTENSION UPDATE"
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}

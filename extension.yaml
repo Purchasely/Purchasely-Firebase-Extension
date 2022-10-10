@@ -13,7 +13,7 @@
 # limitations under the License.
 
 name: purchasely-in-app-purchases
-version: 1.0.4
+version: 1.0.5
 specVersion: v1beta
 
 displayName: Run In-App Purchases & Subscriptions with Purchasely
@@ -22,7 +22,7 @@ description: Quickly implement & seamlessly manage your iOS & Android In-App Pur
 license: Apache-2.0
 
 sourceUrl: https://github.com/Purchasely/Purchasely-Firebase-Extension
-releaseNotesUrl: https://github.com/Purchasely/Purchasely-Firebase-Extension/CHANGELOG.md
+releaseNotesUrl: https://github.com/Purchasely/Purchasely-Firebase-Extension/blob/master/CHANGELOG.md
 
 author:
   authorName: Purchasely
