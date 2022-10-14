@@ -72,7 +72,7 @@ This extension uses the following Firebase services which may have associated ch
 
 This extension also uses the following third-party services:
 
-- Purchasely ([pricing information](https://www.purchasely.com/pricing))
+- Purchasely ([Talk to Purchasely and get started!](https://www.purchasely.com/plan-demo-firebase))
 
 You are responsible for any costs associated with your use of these services.
 
