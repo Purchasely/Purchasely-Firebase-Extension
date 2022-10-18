@@ -1,3 +1,7 @@
+## Version 1.0.6
+
+Update documentation
+
 ## Version 1.0.5
 
 Bugfix to prevent read of undefined date attributes
@@ -13,6 +17,6 @@ Updated dependencies
 Bugfixes
 Updated dependencies
 
-## Version 1.0.3
+## Version 1.0.2
 
 Initial release
