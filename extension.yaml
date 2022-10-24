@@ -138,7 +138,6 @@ params:
       What is the path to the Cloud Firestore collection where the extension should store the raw legacy events coming from the Purchasely webhook?
       This should be a new collection that the extension will create when receiving the first events.
       Leave this field empty if you do not want the extension to save the raw Purchasely Legacy Events.
-    default: PurchaselyEvents
     validationRegex: "^[^/]+(/[^/]+/[^/]+)*$"
     validationErrorMessage: Firestore collection paths must be an odd number of segments separated by slashes, e.g. "path/to/collection".
     required: false
@@ -177,6 +176,7 @@ params:
 
   - param: PURCHASELY_SHARED_SECRET
     label: Purchasely Client Webhook Shared Secret
+    type: secret
     description: >-
       What is your Purchasely Client Webhook shared secret?
       To validate and authenticate incoming webhook requests, the extension needs to verify their signature

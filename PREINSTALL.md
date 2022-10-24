@@ -20,7 +20,7 @@ Before installing this extension, set up the following Firebase services in your
 Then, if you haven't already, in the [Purchasely Console](https://console.purchasely.io/):
 
 - Get your [Client shared secret](https://docs.purchasely.com/quick-start/webhook-1/detailed-specification#request).
-Purchasely Console > Applications > [YOUR APP] > App settings > Backend & SDK Configuration
+  Purchasely Console > Applications > [YOUR APP] > App settings > Backend & SDK Configuration
 
 #### Billing
 
@@ -28,6 +28,7 @@ This extension uses the following Firebase services which may have associated ch
 
 - Cloud Firestore
 - Cloud Functions
+- Cloud Secret Manager
 - Firebase Authentication
 
 This extension also uses the following third-party services:
