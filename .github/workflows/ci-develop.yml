@@ -12,14 +12,14 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@master
       - name: Cache Yarn Dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: "**/node_modules"
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
       - name: Setup Node Version
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: "14"
+          node-version: "16"
       - name: Install Firebase
         run: |
           yarn install
@@ -35,7 +35,7 @@ jobs:
           tsc --build tsconfig.json
           cd ../
       - name: Archive Extension Build Artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: latest-develop-artifact
           retention-days: 30
@@ -58,18 +58,18 @@ jobs:
     needs: build
     steps:
       - name: Download Build Artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: latest-develop-artifact
       - name: Cache Yarn Dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: "**/node_modules"
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
       - name: Setup Node Version
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: "14"
+          node-version: "16"
       - name: Install Firebase
         run: |
           yarn install
@@ -85,7 +85,7 @@ jobs:
         env:
           FIRESTORE_EMULATOR_HOST: "localhost:8080"
       - name: Archive Extension Coverage
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: latest-develop-coverage
           retention-days: 30
@@ -97,7 +97,7 @@ jobs:
     needs: test
     steps:
       - name: Download Test Coverage Artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: latest-develop-coverage
       - name: Archive Extension Coverage
@@ -108,18 +108,18 @@ jobs:
     needs: test
     steps:
       - name: Download Build Artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: latest-develop-artifact
       - name: Cache Yarn Dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: "**/node_modules"
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
       - name: Setup Node Version
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: "14"
+          node-version: "16"
       - name: Install Firebase
         run: |
           yarn install
@@ -136,8 +136,8 @@ jobs:
           cat .extension-params.env
       - name: Deploy to Purchasely's Firebase Project
         run: |
+          yarn run firebase ext:install ./ --project $FIREBASE_PROJECT_ID --token $FIREBASE_TOKEN --non-interactive --force --params ./.extension-params.env
           echo "DEPLOYING THE FIREBASE EXTENSION TO PURCHASELY'S PROJECT"
-          yarn run firebase ext:install ./ --params ./.extension-params.env --project $FIREBASE_PROJECT_ID --token $FIREBASE_TOKEN --non-interactive --force
           echo "DEPLOYED THE FIREBASE EXTENSION TO PURCHASELY'S PROJECT"
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
