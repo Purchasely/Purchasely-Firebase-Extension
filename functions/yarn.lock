@@ -2505,13 +2505,14 @@ firebase-admin@^8.6.0:
     "@google-cloud/firestore" "^3.0.0"
     "@google-cloud/storage" "^4.1.2"
 
-firebase-functions-test@^0.1.6:
-  version "0.1.7"
-  resolved "https://registry.yarnpkg.com/firebase-functions-test/-/firebase-functions-test-0.1.7.tgz#c1f9b82157a1435e38c6707f0943447403ab1703"
-  integrity sha512-/zVQhaUZ+M7z25aUaZSIah0MIDZIfnRfQxtHYTE8hgUgODmKdaMX20vh5Gv23hnCPauIHuYb7XFTUOZiWU1udA==
+firebase-functions-test@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/firebase-functions-test/-/firebase-functions-test-2.1.0.tgz#47caae96c2f3d2ff7fc2d4e59189105e143c90b6"
+  integrity sha512-USA1iwprxStMSidxBXBVydQOEUrByVdDSD83oUFX5+e/sdeLY3qFWk3naC2XhfoXw9T/RF9m+p8EarupS+Xo9w==
   dependencies:
     "@types/lodash" "^4.14.104"
     lodash "^4.17.5"
+    ts-deepmerge "^2.0.1"
 
 firebase-functions@^3.3.0:
   version "3.21.2"
@@ -5195,6 +5196,11 @@ trim-off-newlines@^1.0.1:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/trim-off-newlines/-/trim-off-newlines-1.0.3.tgz#8df24847fcb821b0ab27d58ab6efec9f2fe961a1"
   integrity sha512-kh6Tu6GbeSNMGfrrZh6Bb/4ZEHV1QlB4xNDBeog8Y9/QwFlKTRyWvY3Fs9tRDAMZliVUwieMgEdIeL/FtqjkJg==
+
+ts-deepmerge@^2.0.1:
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/ts-deepmerge/-/ts-deepmerge-2.0.7.tgz#36786a9a10b5f3a6f5154007cf17bfba7251e0a7"
+  integrity sha512-3phiGcxPSSR47RBubQxPoZ+pqXsEsozLo4G4AlSrsMKTFg9TA3l+3he5BqpUi9wiuDbaHWXH/amlzQ49uEdXtg==
 
 ts-node@^10.0.0:
   version "10.8.0"
