@@ -50,7 +50,7 @@ resources:
       Receives the Server to Server notifications from Purchasely's webhook, validates it's signature, creates the associated Consumable, Non-Consumable or Subscription document, manages the user's Firebase Authentication Custom Claims for Subscriptions (if enabled) and creates and the raw Event document.
     properties:
       location: ${LOCATION}
-      runtime: nodejs14
+      runtime: nodejs16
       httpsTrigger: {}
 
 params:
