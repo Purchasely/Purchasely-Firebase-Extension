@@ -21,7 +21,7 @@
     "ajv": "^8.5.0",
     "ajv-formats": "^2.1.0",
     "class-transformer": "^0.5.1",
-    "class-validator": "^0.13.1",
+    "class-validator": "^0.14.0",
     "express": "^4.17.1",
     "firebase-admin": "^11.10.1",
     "firebase-functions": "^4.4.1",
