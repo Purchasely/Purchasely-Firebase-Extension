@@ -13,7 +13,7 @@
 # limitations under the License.
 
 name: purchasely-in-app-purchases
-version: 1.0.7
+version: 1.0.8
 specVersion: v1beta
 
 displayName: Run In-App Purchases & Subscriptions with Purchasely

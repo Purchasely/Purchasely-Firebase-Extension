@@ -87,7 +87,7 @@ test("Valid Webhook Event with Consumable Event Plan Type but Subscription body 
 
   const expectedBody = {
     clientType: "PURCHASELY_FIREBASE_EXTENSION",
-    clientVersion: "0.0.2",
+    clientVersion: "1.0.8",
     handledApiVersion: "2"
   };
 

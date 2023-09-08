@@ -10,5 +10,7 @@ export const appPlatformFromStore = (store: PurchaselyStore): PurchaselyAppPlatf
       return PurchaselyAppPlatform.ANDROID;
     case PurchaselyStore.HUAWEI_APP_GALLERY:
       return PurchaselyAppPlatform.ANDROID;
+    case PurchaselyStore.STRIPE:
+      return PurchaselyAppPlatform.WEB;
   }
 }

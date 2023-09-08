@@ -1,3 +1,8 @@
+## Version 1.0.8
+
+Add STRIPE store enum
+Bump dependencies
+
 ## Version 1.0.7
 
 Fix typo with PROMO_CODE enum
