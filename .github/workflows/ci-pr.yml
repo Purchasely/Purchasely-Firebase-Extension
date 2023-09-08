@@ -15,19 +15,19 @@ jobs:
         uses: actions/cache@v3
         with:
           path: "**/node_modules"
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Setup Node Version
         uses: actions/setup-node@v3
         with:
           node-version: "16"
       - name: Install Firebase
         run: |
-          yarn install
-          yarn global add firebase-tools@v12.5.2
+          npm ci
+          npm install -g firebase-tools@v12.5.2
       - name: Install Dependencies
         run: |
           cd ./functions
-          yarn install
+          npm ci
           cd ../
       - name: Build
         run: |
@@ -43,6 +43,7 @@ jobs:
             extension.yaml
             firebase.json
             package.json
+            package-lock.json
             POSTINSTALL.md
             PREINSTALL.md
             functions/src
@@ -50,7 +51,7 @@ jobs:
             functions/lib
             functions/tsconfig.json
             functions/package.json
-            functions/yarn.lock
+            functions/package-lock.json
             ci
   test:
     name: Test
@@ -65,23 +66,23 @@ jobs:
         uses: actions/cache@v3
         with:
           path: "**/node_modules"
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Setup Node Version
         uses: actions/setup-node@v3
         with:
           node-version: "16"
       - name: Install Firebase
         run: |
-          yarn install
-          yarn global add firebase-tools@v12.5.2
+          npm ci
+          npm install -g firebase-tools@v12.5.2
       - name: Install Dependencies
         run: |
           cd ./functions
-          yarn install
+          npm ci
           cd ../
       - name: Run tests with mocks
         run: |
-          firebase emulators:exec --only firestore "cd ./functions && yarn test && cd ../"
+          firebase emulators:exec --only firestore "cd ./functions && npm test && cd ../"
         env:
           FIRESTORE_EMULATOR_HOST: "localhost:8080"
       - name: Archive Extension Coverage

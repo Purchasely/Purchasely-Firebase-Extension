@@ -19,14 +19,14 @@ jobs:
         uses: actions/cache@v3
         with:
           path: "**/node_modules"
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Install Firebase
         run: |
-          yarn install
+          npm ci
       - name: Install Dependencies
         run: |
           cd ./functions
-          yarn install
+          npm ci
           cd ../
       - name: Build
         run: |
@@ -42,6 +42,7 @@ jobs:
             extension.yaml
             firebase.json
             package.json
+            package-lock.json
             CHANGELOG.md
             POSTINSTALL.md
             PREINSTALL.md
@@ -50,7 +51,7 @@ jobs:
             functions/lib
             functions/tsconfig.json
             functions/package.json
-            functions/yarn.lock
+            functions/package-lock.json
             ci
   test:
     name: Test
@@ -69,19 +70,19 @@ jobs:
         uses: actions/cache@v3
         with:
           path: "**/node_modules"
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Install Firebase
         run: |
-          yarn install
-          yarn global add firebase-tools@v12.5.2
+          npm ci
+          npm install -g firebase-tools@v12.5.2
       - name: Install Dependencies
         run: |
           cd ./functions
-          yarn install
+          npm ci
           cd ../
       - name: Run tests with mocks
         run: |
-          firebase emulators:exec --only firestore "cd ./functions && yarn test && cd ../"
+          firebase emulators:exec --only firestore "cd ./functions && npm test && cd ../"
         env:
           FIRESTORE_EMULATOR_HOST: "localhost:8080"
       - name: Archive Extension Coverage
@@ -115,26 +116,24 @@ jobs:
         uses: actions/cache@v3
         with:
           path: "**/node_modules"
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Setup Node Version
         uses: actions/setup-node@v3
         with:
           node-version: "16"
       - name: Install Firebase
         run: |
-          yarn install
-          yarn global add firebase-tools@v12.5.2
+          npm ci
+          npm install -g firebase-tools@v12.5.2
       - name: Install Dependencies
         run: |
           cd ./functions
-          yarn install
+          npm ci
           cd ../
       - name: Publish
         run: |
           echo "PUBLISHING THE FIREBASE EXTENSION UPDATE"
-          firebase ext:dev:upload purchasely/purchasely-in-app-purchases --token $FIREBASE_TOKEN
-          # firebase --open-sesame extdev
-          # firebase ext:dev:publish purchasely/purchasely-in-app-purchases --token $FIREBASE_TOKEN --project $PROJECT_ID --non-interactive --force
+          firebase ext:dev:upload purchasely/purchasely-in-app-purchases --token $FIREBASE_TOKEN --repo $GITHUB_SERVER_URL/$GITHUB_REPOSITORY --stage stable --ref $GITHUB_REF
           echo "PUBLISHED THE FIREBASE EXTENSION UPDATE"
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
