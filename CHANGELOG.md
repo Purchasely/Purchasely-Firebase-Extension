@@ -1,6 +1,6 @@
 ## Version 1.0.8
 
-Add STRIPE store enum
+Handle STRIPE store enum type in Webhooks
 Bump dependencies
 
 ## Version 1.0.7

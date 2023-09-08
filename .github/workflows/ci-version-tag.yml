@@ -133,7 +133,7 @@ jobs:
       - name: Publish
         run: |
           echo "PUBLISHING THE FIREBASE EXTENSION UPDATE"
-          firebase ext:dev:upload purchasely/purchasely-in-app-purchases --token $FIREBASE_TOKEN --repo $GITHUB_SERVER_URL/$GITHUB_REPOSITORY --stage stable --ref $GITHUB_REF
+          firebase ext:dev:upload purchasely/purchasely-in-app-purchases --token $FIREBASE_TOKEN --repo $GITHUB_SERVER_URL/$GITHUB_REPOSITORY --stage stable --ref $GITHUB_REF --force
           echo "PUBLISHED THE FIREBASE EXTENSION UPDATE"
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
