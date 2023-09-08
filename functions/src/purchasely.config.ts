@@ -39,15 +39,15 @@ export const PurchaselyConfig: PurchaselyConfigInterface = {
       },
       purchaselyConsumables: {
         enabled: true,
-        collectionName: process.env.PURCHASELY_CONSUMABLES_COLLECTION as string,
+        collectionName: (process.env.PURCHASELY_CONSUMABLES_COLLECTION as string) ?? "PurchaselyConsumablesV2",
       },
       purchaselyNonConsumables: {
         enabled: true,
-        collectionName: process.env.PURCHASELY_NON_CONSUMABLES_COLLECTION as string,
+        collectionName: (process.env.PURCHASELY_NON_CONSUMABLES_COLLECTION as string) ?? "PurchaselyNonConsumablesV2",
       },
       purchaselySubscriptions: {
         enabled: true,
-        collectionName: process.env.PURCHASELY_SUBSCRIPTIONS_COLLECTION as string,
+        collectionName: (process.env.PURCHASELY_SUBSCRIPTIONS_COLLECTION as string) ?? "PurchaselySubscriptionsV2",
       },
       purchaselyEvents: {
         enabled: process.env.PURCHASELY_EVENTS_COLLECTION_2 !== undefined && process.env.PURCHASELY_EVENTS_COLLECTION_2 !== "",
@@ -66,15 +66,15 @@ export const PurchaselyConfig: PurchaselyConfigInterface = {
       },
       purchaselyConsumables: {
         enabled: true,
-        collectionName: process.env.PURCHASELY_CONSUMABLES_COLLECTION as string,
+        collectionName: (process.env.PURCHASELY_CONSUMABLES_COLLECTION as string) ?? "PurchaselyConsumablesV3",
       },
       purchaselyNonConsumables: {
         enabled: true,
-        collectionName: process.env.PURCHASELY_NON_CONSUMABLES_COLLECTION as string,
+        collectionName: (process.env.PURCHASELY_NON_CONSUMABLES_COLLECTION as string) ?? "PurchaselyNonConsumablesV3",
       },
       purchaselySubscriptions: {
         enabled: true,
-        collectionName: process.env.PURCHASELY_SUBSCRIPTIONS_COLLECTION as string,
+        collectionName: (process.env.PURCHASELY_SUBSCRIPTIONS_COLLECTION as string) ?? "PurchaselySubscriptionsV3",
       },
       purchaselyEvents: {
         enabled: process.env.PURCHASELY_EVENTS_COLLECTION_3 !== undefined && process.env.PURCHASELY_EVENTS_COLLECTION_3 !== "",

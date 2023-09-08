@@ -43,7 +43,6 @@ const webhookHandler: (request: Request, response: Response) => Promise<void> = 
 
 export const purchaselyWebhookHandler =
   FirebaseFunctions
-    .handler
     .https.onRequest(
       purchaselyServices.logs.cloudFunctionCrashLogger(webhookHandler)
     );

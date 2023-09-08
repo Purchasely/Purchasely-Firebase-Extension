@@ -23,7 +23,7 @@ jobs:
       - name: Install Firebase
         run: |
           yarn install
-          yarn global add firebase-tools@v10.9.2
+          yarn global add firebase-tools@v12.5.2
       - name: Install Dependencies
         run: |
           cd ./functions
@@ -40,7 +40,6 @@ jobs:
           name: latest-develop-artifact
           retention-days: 30
           path: |
-            .extension-params.env
             extension.yaml
             firebase.json
             package.json
@@ -52,6 +51,7 @@ jobs:
             functions/tsconfig.json
             functions/package.json
             functions/yarn.lock
+            ci
   test:
     name: Test
     runs-on: ubuntu-latest
@@ -73,7 +73,7 @@ jobs:
       - name: Install Firebase
         run: |
           yarn install
-          yarn global add firebase-tools@v10.9.2
+          yarn global add firebase-tools@v12.5.2
       - name: Install Dependencies
         run: |
           cd ./functions
@@ -123,6 +123,8 @@ jobs:
       - name: Install Firebase
         run: |
           yarn install
+          yarn global add firebase-tools@v12.5.2
+          firebase
       - name: Install Dependencies
         run: |
           cd ./functions
@@ -132,11 +134,13 @@ jobs:
         env:
           PURCHASELY_SHARED_SECRET: ${{ secrets.PURCHASELY_SHARED_SECRET }}
         run: |
-          echo "PURCHASELY_SHARED_SECRET=$PURCHASELY_SHARED_SECRET" >> .extension-params.env
-          cat .extension-params.env
+          echo "PURCHASELY_SHARED_SECRET=$PURCHASELY_SHARED_SECRET" >> ./ci/extensions/purchasely-in-app-purchases-ext.env
+          cat ./ci/extensions/purchasely-in-app-purchases-ext.env
       - name: Deploy to Purchasely's Firebase Project
         run: |
-          yarn run firebase ext:install ./ --project $FIREBASE_PROJECT_ID --token $FIREBASE_TOKEN --non-interactive --force --params ./.extension-params.env
+          cd ./ci
+          ls -al
+          firebase deploy --only extensions --config ./firebase.json --project $FIREBASE_PROJECT_ID --token $FIREBASE_TOKEN --non-interactive --force
           echo "DEPLOYING THE FIREBASE EXTENSION TO PURCHASELY'S PROJECT"
           echo "DEPLOYED THE FIREBASE EXTENSION TO PURCHASELY'S PROJECT"
         env:

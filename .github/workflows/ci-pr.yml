@@ -23,7 +23,7 @@ jobs:
       - name: Install Firebase
         run: |
           yarn install
-          yarn global add firebase-tools@v10.9.2
+          yarn global add firebase-tools@v12.5.2
       - name: Install Dependencies
         run: |
           cd ./functions
@@ -40,7 +40,6 @@ jobs:
           name: latest-develop-artifact
           retention-days: 30
           path: |
-            .extension-params.env
             extension.yaml
             firebase.json
             package.json
@@ -52,6 +51,7 @@ jobs:
             functions/tsconfig.json
             functions/package.json
             functions/yarn.lock
+            ci
   test:
     name: Test
     runs-on: ubuntu-latest
@@ -73,7 +73,7 @@ jobs:
       - name: Install Firebase
         run: |
           yarn install
-          yarn global add firebase-tools@v10.9.2
+          yarn global add firebase-tools@v12.5.2
       - name: Install Dependencies
         run: |
           cd ./functions

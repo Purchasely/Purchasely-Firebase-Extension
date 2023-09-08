@@ -39,7 +39,6 @@ jobs:
           name: latest-production-artifact
           retention-days: 30
           path: |
-            .extension-params.env
             extension.yaml
             firebase.json
             package.json
@@ -52,6 +51,7 @@ jobs:
             functions/tsconfig.json
             functions/package.json
             functions/yarn.lock
+            ci
   test:
     name: Test
     runs-on: ubuntu-latest
@@ -73,7 +73,7 @@ jobs:
       - name: Install Firebase
         run: |
           yarn install
-          yarn global add firebase-tools@v10.9.2
+          yarn global add firebase-tools@v12.5.2
       - name: Install Dependencies
         run: |
           cd ./functions
@@ -123,7 +123,7 @@ jobs:
       - name: Install Firebase
         run: |
           yarn install
-          yarn global add firebase-tools@v10.9.2
+          yarn global add firebase-tools@v12.5.2
       - name: Install Dependencies
         run: |
           cd ./functions
@@ -132,8 +132,9 @@ jobs:
       - name: Publish
         run: |
           echo "PUBLISHING THE FIREBASE EXTENSION UPDATE"
-          yarn run firebase --open-sesame extdev
-          yarn run firebase ext:dev:publish purchasely/purchasely-in-app-purchases --token $FIREBASE_TOKEN --project $PROJECT_ID --non-interactive --force
+          firebase ext:dev:upload purchasely/purchasely-in-app-purchases --token $FIREBASE_TOKEN
+          # firebase --open-sesame extdev
+          # firebase ext:dev:publish purchasely/purchasely-in-app-purchases --token $FIREBASE_TOKEN --project $PROJECT_ID --non-interactive --force
           echo "PUBLISHED THE FIREBASE EXTENSION UPDATE"
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
