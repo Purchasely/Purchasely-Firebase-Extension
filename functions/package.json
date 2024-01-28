@@ -28,7 +28,7 @@
     "firebase-admin": "^11.10.1",
     "firebase-functions": "^4.4.1",
     "luxon": "^3.4.3",
-    "typescript": "^5.2.2",
+    "typescript": "^5.3.3",
     "uuid": "^9.0.1"
   },
   "devDependencies": {
