@@ -63,7 +63,7 @@ jobs:
         with:
           node-version: "16"
       - name: Download Build Artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: latest-production-artifact
       - name: Cache Yarn Dependencies
@@ -98,7 +98,7 @@ jobs:
     needs: test
     steps:
       - name: Download Test Coverage Artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: latest-production-coverage
       - name: Archive Extension Coverage
@@ -109,7 +109,7 @@ jobs:
     needs: test
     steps:
       - name: Download Build Artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: latest-production-artifact
       - name: Cache Yarn Dependencies
