@@ -37,7 +37,7 @@ jobs:
       - name: Archive Extension Build Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: latest-develop-artifact
+          name: latest-develop-artifact-${{ github.sha }}
           retention-days: 30
           path: |
             extension.yaml
@@ -61,7 +61,7 @@ jobs:
       - name: Download Build Artifacts
         uses: actions/download-artifact@v4
         with:
-          name: latest-develop-artifact
+          name: latest-develop-artifact-${{ github.sha }}
       - name: Cache Yarn Dependencies
         uses: actions/cache@v4
         with:
