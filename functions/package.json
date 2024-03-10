@@ -19,7 +19,7 @@
   "main": "lib/index.js",
   "dependencies": {
     "@types/luxon": "^3.4.2",
-    "@types/uuid": "^9.0.4",
+    "@types/uuid": "^9.0.8",
     "ajv": "^8.12.0",
     "ajv-formats": "^2.1.1",
     "class-transformer": "^0.5.1",
