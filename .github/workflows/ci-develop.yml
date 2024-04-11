@@ -23,7 +23,7 @@ jobs:
       - name: Install Firebase
         run: |
           npm ci
-          npm install -g firebase-tools@v12.5.2
+          npm install -g firebase-tools@v13.7.1
       - name: Install Dependencies
         run: |
           cd ./functions
@@ -74,7 +74,7 @@ jobs:
       - name: Install Firebase
         run: |
           npm ci
-          npm install -g firebase-tools@v12.5.2
+          npm install -g firebase-tools@v13.7.1
       - name: Install Dependencies
         run: |
           cd ./functions
@@ -124,7 +124,7 @@ jobs:
       - name: Install Firebase
         run: |
           npm ci
-          npm install -g firebase-tools@v12.5.2
+          npm install -g firebase-tools@v13.7.1
           firebase
       - name: Install Dependencies
         run: |
