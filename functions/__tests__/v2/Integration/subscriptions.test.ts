@@ -65,7 +65,7 @@ test("Subscription Webhook Event responds with the expected body", async t => {
   const event = defaultWebhookEvent();
   const expectedBody = {
     clientType: "PURCHASELY_FIREBASE_EXTENSION",
-    clientVersion: "1.0.8",
+    clientVersion: "1.0.9",
     handledApiVersion: "2"
   };
 

@@ -54,7 +54,7 @@ export const functions: {
       .then(() => {
         const result = {
           clientType: "PURCHASELY_FIREBASE_EXTENSION",
-          clientVersion: "1.0.8",
+          clientVersion: "1.0.9",
           handledApiVersion: "2"
         };
         response.status(200).send(result);

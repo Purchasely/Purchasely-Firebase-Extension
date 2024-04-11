@@ -1,3 +1,7 @@
+## Version 1.0.9
+
+Bump to Node 18 & bump dependencies
+
 ## Version 1.0.8
 
 Handle STRIPE store enum type in Webhooks
