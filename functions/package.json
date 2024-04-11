@@ -14,7 +14,7 @@
     "test": "nyc --reporter html --reporter text ava --verbose"
   },
   "engines": {
-    "node": "16"
+    "node": "18"
   },
   "main": "lib/index.js",
   "dependencies": {
