@@ -3,6 +3,6 @@
   "repository": "git@github.com:Purchasely/Purchasely-Firebase-Extension.git",
   "author": "Purchasely",
   "devDependencies": {
-    "firebase-tools": "^13.11.4"
+    "firebase-tools": "^13.17.0"
   }
 }
