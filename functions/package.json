@@ -44,7 +44,7 @@
     "firebase-functions-test": "^3.2.0",
     "google-gax": "^4.3.7",
     "nodemon": "^3.1.0",
-    "nyc": "^15.1.0",
+    "nyc": "^17.1.0",
     "prettier": "^3.3.3",
     "sinon": "^17.0.1",
     "ts-node": "^10.9.2",
