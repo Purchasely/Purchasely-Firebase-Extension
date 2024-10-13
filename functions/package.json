@@ -19,7 +19,7 @@
   "main": "lib/index.js",
   "dependencies": {
     "@types/luxon": "^3.4.2",
-    "@types/uuid": "^9.0.8",
+    "@types/uuid": "^10.0.0",
     "ajv": "^8.12.0",
     "ajv-formats": "^3.0.1",
     "class-transformer": "^0.5.1",
@@ -29,7 +29,7 @@
     "firebase-functions": "^6.0.1",
     "luxon": "^3.4.4",
     "typescript": "^5.6.2",
-    "uuid": "^9.0.1"
+    "uuid": "^10.0.0"
   },
   "devDependencies": {
     "@ava/typescript": "^4.1.0",
