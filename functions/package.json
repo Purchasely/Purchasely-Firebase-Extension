@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "@ava/typescript": "^4.1.0",
-    "@firebase/rules-unit-testing": "^3.0.2",
+    "@firebase/rules-unit-testing": "^4.0.0",
     "@types/sinon": "^17.0.3",
     "@typescript-eslint/eslint-plugin": "^7.14.1",
     "@typescript-eslint/parser": "^7.18.0",
