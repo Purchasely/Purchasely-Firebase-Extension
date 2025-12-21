@@ -16,7 +16,7 @@ jobs:
         with:
           node-version: "18"
       - name: Cache Yarn Dependencies
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: "**/node_modules"
           key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
@@ -67,7 +67,7 @@ jobs:
         with:
           name: latest-production-artifact
       - name: Cache Yarn Dependencies
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: "**/node_modules"
           key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
@@ -113,7 +113,7 @@ jobs:
         with:
           name: latest-production-artifact
       - name: Cache Yarn Dependencies
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: "**/node_modules"
           key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
