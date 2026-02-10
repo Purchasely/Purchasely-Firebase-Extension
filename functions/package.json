@@ -18,7 +18,7 @@
   },
   "main": "lib/index.js",
   "dependencies": {
-    "@types/luxon": "^3.4.2",
+    "@types/luxon": "^3.7.1",
     "@types/uuid": "^10.0.0",
     "ajv": "^8.17.1",
     "ajv-formats": "^3.0.1",
@@ -27,7 +27,7 @@
     "express": "^4.22.1",
     "firebase-admin": "^12.2.0",
     "firebase-functions": "^6.0.1",
-    "luxon": "^3.5.0",
+    "luxon": "^3.7.2",
     "typescript": "^5.9.3",
     "uuid": "^10.0.0"
   },
