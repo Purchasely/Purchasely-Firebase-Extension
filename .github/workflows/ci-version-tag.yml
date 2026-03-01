@@ -63,7 +63,7 @@ jobs:
         with:
           node-version: "lts/jod"
       - name: Download Build Artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: latest-production-artifact
       - name: Cache Yarn Dependencies
@@ -98,7 +98,7 @@ jobs:
     needs: test
     steps:
       - name: Download Test Coverage Artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: latest-production-coverage-${{ github.sha }}
       - name: Archive Extension Coverage
@@ -109,7 +109,7 @@ jobs:
     needs: test
     steps:
       - name: Download Build Artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: latest-production-artifact
       - name: Cache Yarn Dependencies
