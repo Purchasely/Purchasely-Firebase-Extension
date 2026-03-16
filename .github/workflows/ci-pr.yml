@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@master
+        uses: actions/checkout@v4
       - name: Cache Yarn Dependencies
         uses: actions/cache@v5
         with:
@@ -35,7 +35,7 @@ jobs:
           tsc --build tsconfig.json
           cd ../
       - name: Archive Extension Build Artifacts
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v7
         with:
           name: latest-develop-artifact-${{ github.sha }}
           retention-days: 30
@@ -59,7 +59,7 @@ jobs:
     needs: build
     steps:
       - name: Download Build Artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: latest-develop-artifact-${{ github.sha }}
       - name: Cache Yarn Dependencies
@@ -86,7 +86,7 @@ jobs:
         env:
           FIRESTORE_EMULATOR_HOST: "localhost:8080"
       - name: Archive Extension Coverage
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v7
         with:
           name: latest-develop-coverage
           retention-days: 30
@@ -98,7 +98,7 @@ jobs:
     needs: test
     steps:
       - name: Download Test Coverage Artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: latest-develop-coverage
       - name: Archive Extension Coverage

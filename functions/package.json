@@ -51,7 +51,7 @@
     "tslint": "^5.20.1"
   },
   "overrides": {
-    "fast-xml-parser": ">=5.3.4"
+    "fast-xml-parser": ">=5.3.8"
   },
   "private": true,
   "ava": {
