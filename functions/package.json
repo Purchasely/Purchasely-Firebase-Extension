@@ -43,7 +43,7 @@
     "eslint-plugin-prettier": "^5.5.5",
     "firebase-functions-test": "^3.4.1",
     "google-gax": "^5.0.6",
-    "nodemon": "^3.1.9",
+    "nodemon": "^3.1.14",
     "nyc": "^18.0.0",
     "prettier": "^3.8.1",
     "sinon": "^21.0.1",
