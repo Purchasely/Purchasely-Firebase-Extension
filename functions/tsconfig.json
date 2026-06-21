@@ -16,7 +16,7 @@
 			"ESNext"
 		],
 		"removeComments": true,
-		"moduleResolution": "node16",
+		"moduleResolution": "node10",
 		"noUnusedParameters": true,
 		"skipLibCheck": true,
 		"strictNullChecks": true,
