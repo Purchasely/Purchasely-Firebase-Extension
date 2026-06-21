@@ -16,13 +16,12 @@
 			"ESNext"
 		],
 		"removeComments": true,
-		"moduleResolution": "node",
-		"ignoreDeprecations": "5.0",
+		"moduleResolution": "node16",
 		"noUnusedParameters": true,
 		"skipLibCheck": true,
 		"strictNullChecks": true,
 		"resolveJsonModule": true,
-		"allowSyntheticDefaultImports": true, // support typesystem compatibility
+		"allowSyntheticDefaultImports": true
 	},
 	"typeAcquisition": {
 		"enable": true,
