@@ -17,6 +17,7 @@
 		],
 		"removeComments": true,
 		"moduleResolution": "node10",
+		"ignoreDeprecations": "6.0",
 		"noUnusedParameters": true,
 		"skipLibCheck": true,
 		"strictNullChecks": true,
