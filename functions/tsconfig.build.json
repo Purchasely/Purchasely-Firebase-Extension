@@ -2,10 +2,9 @@
 	"compilerOptions": {
 		"module": "commonjs",
 		"noImplicitReturns": true,
-		"noUnusedLocals": false,
-		"noUnusedParameters": false,
-		"outDir": "lib_test",
-		"rootDir": ".",
+		"noUnusedLocals": true,
+		"outDir": "lib",
+		"rootDir": "./src",
 		"sourceMap": true,
 		"strict": true,
 		"target": "ES2020",
@@ -19,9 +18,9 @@
 		"removeComments": true,
 		"moduleResolution": "node10",
 		"ignoreDeprecations": "6.0",
+		"noUnusedParameters": true,
 		"skipLibCheck": true,
-		"strictNullChecks": false,
-		"noImplicitAny": false,
+		"strictNullChecks": true,
 		"resolveJsonModule": true,
 		"allowSyntheticDefaultImports": true
 	},
@@ -34,8 +33,7 @@
 	},
 	"compileOnSave": true,
 	"include": [
-		"src",
-		"__tests__"
+		"src"
 	],
 	"exclude": [
 		"node_modules/**/*"

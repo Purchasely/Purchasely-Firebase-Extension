@@ -35,6 +35,9 @@ Thumbs.db
 # Ignore built ts files
 dist/**/*
 
+# Test compilation output
+functions/lib_test/
+
 # Typescript v1 declaration files
 typings/
 
