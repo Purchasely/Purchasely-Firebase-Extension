@@ -12,7 +12,7 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@master
       - name: Setup Node Version
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: "lts/jod"
       - name: Cache Yarn Dependencies
@@ -59,7 +59,7 @@ jobs:
     needs: build
     steps:
       - name: Setup Node Version
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: "lts/jod"
       - name: Download Build Artifacts
@@ -118,7 +118,7 @@ jobs:
           path: "**/node_modules"
           key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Setup Node Version
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: "lts/jod"
       - name: Install Firebase
