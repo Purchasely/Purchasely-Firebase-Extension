@@ -18,7 +18,7 @@
   },
   "main": "lib/index.js",
   "dependencies": {
-    "@types/luxon": "^3.7.1",
+    "@types/luxon": "^3.7.3",
     "@types/uuid": "^11.0.0",
     "ajv": "^8.20.0",
     "ajv-formats": "^3.0.1",
