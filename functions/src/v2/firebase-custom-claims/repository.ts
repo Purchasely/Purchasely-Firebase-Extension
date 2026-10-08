@@ -31,7 +31,7 @@ const decodePurchaselyCustomClaims = (customClaims: { [key: string]: any; } | un
         purchasely_subscriptions: [],
       }
     }
-  } catch (error) {
+  } catch {
     return {
       ...customClaims,
       purchasely_subscriptions: [],
