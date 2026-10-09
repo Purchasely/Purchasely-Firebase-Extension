@@ -66,8 +66,7 @@ export const saveSubscription = (service: SubscriptionsService | null) => (webho
   const userId =
     webhook.user.vendor_id !== undefined && webhook.user.vendor_id !== null
       ? webhook.user.vendor_id
-      : // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      webhook.user.anonymous_id!;
+      : webhook.user.anonymous_id!;
 
   const subscription: PurchaselySubscriptionDomain = {
     id: `${userId}-${webhook.properties.product.vendor_id}`,
