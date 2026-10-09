@@ -4,8 +4,8 @@ import globals from "globals";
 
 export default [
   { ignores: ["lib/**"] },
-  js.configs.recommended,
   ...tsPlugin.configs["flat/recommended"],
+  js.configs.recommended,
   {
     languageOptions: {
       globals: {
