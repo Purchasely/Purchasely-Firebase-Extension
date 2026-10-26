@@ -1,5 +1,6 @@
 
-import * as admin from "firebase-admin";
+import { initializeApp } from "firebase-admin/app";
+import { getFirestore } from "firebase-admin/firestore";
 import test from "ava";
 import { DateTime } from "luxon";
 import { v4 as uuid } from "uuid";
@@ -11,8 +12,8 @@ import { subscriptionsFactory, firestoreSubscriptionToStringDateSubscription } f
 
 test("Subscription Update should throw", async t => {
   const firebaseAppName = uuid();
-  const testApp = admin.initializeApp({ projectId: uuid() }, firebaseAppName)
-  const db = admin.firestore(testApp);
+  const testApp = initializeApp({ projectId: uuid() }, firebaseAppName)
+  const db = getFirestore(testApp);
   const collectionName = uuid();
   const repository = PurchaselySubscriptionsRepository(collectionName)(db);
   const subscription: PurchaselySubscriptionDomain = subscriptionsFactory();
@@ -22,8 +23,8 @@ test("Subscription Update should throw", async t => {
 
 test("Subscription should be retrievable from firestore after creation", async t => {
   const firebaseAppName = uuid();
-  const testApp = admin.initializeApp({ projectId: uuid() }, firebaseAppName)
-  const db = admin.firestore(testApp);
+  const testApp = initializeApp({ projectId: uuid() }, firebaseAppName)
+  const db = getFirestore(testApp);
   const collectionName = uuid();
   const repository = PurchaselySubscriptionsRepository(collectionName)(db);
   const subscriptionToCreate: PurchaselySubscriptionDomain = subscriptionsFactory();

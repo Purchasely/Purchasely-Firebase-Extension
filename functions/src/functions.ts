@@ -2,7 +2,9 @@ import Ajv from "ajv";
 import addFormats from "ajv-formats";
 import { Request, Response } from "express";
 import * as FirebaseFunctions from "firebase-functions";
-import * as admin from "firebase-admin";
+import { initializeApp } from "firebase-admin/app";
+import { getAuth } from "firebase-admin/auth";
+import { getFirestore } from "firebase-admin/firestore";
 import { PurchaselyConfig } from "./purchasely.config";
 import { PurchaselyServices } from "./services";
 import { PurchaselyAPIVersions } from './purchaselyApiVersions.enum';
@@ -12,9 +14,9 @@ import * as purchaselyV3 from "./v3";
 const ajv = new Ajv({ allErrors: true });
 addFormats(ajv);
 
-admin.initializeApp();
-const auth = admin.auth();
-const firestore = admin.firestore();
+initializeApp();
+const auth = getAuth();
+const firestore = getFirestore();
 
 const purchaselyServices = PurchaselyServices(PurchaselyConfig)(auth, firestore);
 

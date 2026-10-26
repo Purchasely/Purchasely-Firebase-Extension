@@ -1,5 +1,6 @@
 
-import * as admin from "firebase-admin";
+import { initializeApp } from "firebase-admin/app";
+import { getFirestore } from "firebase-admin/firestore";
 import test from "ava";
 import { DateTime } from "luxon";
 import { v4 as uuid } from "uuid";
@@ -11,8 +12,8 @@ import { consumablesFactory, firestoreConsumableToStringDateConsumable } from ".
 
 test("Consumable Update should throw", async t => {
   const firebaseAppName = uuid();
-  const testApp = admin.initializeApp({ projectId: uuid() }, firebaseAppName)
-  const db = admin.firestore(testApp);
+  const testApp = initializeApp({ projectId: uuid() }, firebaseAppName)
+  const db = getFirestore(testApp);
   const collectionName = uuid();
   const repository = PurchaselyConsumablesRepository(collectionName)(db);
   const consumable: PurchaselyConsumableDomain = consumablesFactory();
@@ -22,8 +23,8 @@ test("Consumable Update should throw", async t => {
 
 test("Consumable should be retrievable from firestore after creation", async t => {
   const firebaseAppName = uuid();
-  const testApp = admin.initializeApp({ projectId: uuid() }, firebaseAppName)
-  const db = admin.firestore(testApp);
+  const testApp = initializeApp({ projectId: uuid() }, firebaseAppName)
+  const db = getFirestore(testApp);
   const collectionName = uuid();
   const repository = PurchaselyConsumablesRepository(collectionName)(db);
   const consumableToCreate: PurchaselyConsumableDomain = consumablesFactory();
