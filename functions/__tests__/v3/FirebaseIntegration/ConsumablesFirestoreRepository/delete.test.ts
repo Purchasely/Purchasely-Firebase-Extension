@@ -1,5 +1,6 @@
 
-import * as admin from "firebase-admin";
+import { initializeApp } from "firebase-admin/app";
+import { getFirestore } from "firebase-admin/firestore";
 import test from "ava";
 import { v4 as uuid } from "uuid";
 
@@ -10,8 +11,8 @@ import { consumablesFactory } from "./_consumables-factory";
 
 test("Consumable Deletion should not throw if Consumable exists", async t => {
   const firebaseAppName = uuid();
-  const testApp = admin.initializeApp({ projectId: uuid() }, firebaseAppName)
-  const db = admin.firestore(testApp);
+  const testApp = initializeApp({ projectId: uuid() }, firebaseAppName)
+  const db = getFirestore(testApp);
   const collectionName = uuid();
   const repository = PurchaselyConsumablesRepository(collectionName)(db);
   const consumable: PurchaselyConsumableDomain = consumablesFactory();
@@ -22,8 +23,8 @@ test("Consumable Deletion should not throw if Consumable exists", async t => {
 
 test("Consumable Deletion should return void", async t => {
   const firebaseAppName = uuid();
-  const testApp = admin.initializeApp({ projectId: uuid() }, firebaseAppName)
-  const db = admin.firestore(testApp);
+  const testApp = initializeApp({ projectId: uuid() }, firebaseAppName)
+  const db = getFirestore(testApp);
   const collectionName = uuid();
   const repository = PurchaselyConsumablesRepository(collectionName)(db);
   const consumable: PurchaselyConsumableDomain = consumablesFactory();
@@ -34,8 +35,8 @@ test("Consumable Deletion should return void", async t => {
 
 test("Consumable should not be retrievable from firestore after deletion", async t => {
   const firebaseAppName = uuid();
-  const testApp = admin.initializeApp({ projectId: uuid() }, firebaseAppName)
-  const db = admin.firestore(testApp);
+  const testApp = initializeApp({ projectId: uuid() }, firebaseAppName)
+  const db = getFirestore(testApp);
   const collectionName = uuid();
   const repository = PurchaselyConsumablesRepository(collectionName)(db);
   const consumable: PurchaselyConsumableDomain = consumablesFactory();

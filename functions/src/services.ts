@@ -1,4 +1,4 @@
-import Firebase from "firebase-admin";
+import { Auth } from "firebase-admin/auth";
 import FirebaseFirestore from "@google-cloud/firestore";
 
 import * as purchaselyV2 from "./v2";
@@ -9,7 +9,7 @@ import { PurchaselyConfigInterface } from "./purchasely.config";
 
 export const PurchaselyServices =
   (purchaselyConfig: PurchaselyConfigInterface) =>
-    (auth: Firebase.auth.Auth, db: FirebaseFirestore.Firestore) => ({
+    (auth: Auth, db: FirebaseFirestore.Firestore) => ({
       logs: PurchaselyLoggingService(),
       v2: purchaselyV2.PurchaselyServices(purchaselyConfig)(auth, db),
       v3: purchaselyV3.PurchaselyServices(purchaselyConfig)(auth, db),

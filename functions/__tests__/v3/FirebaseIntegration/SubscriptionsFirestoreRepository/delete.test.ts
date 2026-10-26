@@ -1,5 +1,6 @@
 
-import * as admin from "firebase-admin";
+import { initializeApp } from "firebase-admin/app";
+import { getFirestore } from "firebase-admin/firestore";
 import test from "ava";
 import { v4 as uuid } from "uuid";
 
@@ -10,8 +11,8 @@ import { subscriptionsFactory } from "./_subscriptions-factory";
 
 test("Subscription Deletion should not throw if Subscription exists", async t => {
   const firebaseAppName = uuid();
-  const testApp = admin.initializeApp({ projectId: uuid() }, firebaseAppName)
-  const db = admin.firestore(testApp);
+  const testApp = initializeApp({ projectId: uuid() }, firebaseAppName)
+  const db = getFirestore(testApp);
   const collectionName = uuid();
   const repository = PurchaselySubscriptionsRepository(collectionName)(db);
   const subscription: PurchaselySubscriptionDomain = subscriptionsFactory();
@@ -22,8 +23,8 @@ test("Subscription Deletion should not throw if Subscription exists", async t =>
 
 test("Subscription Deletion should return void", async t => {
   const firebaseAppName = uuid();
-  const testApp = admin.initializeApp({ projectId: uuid() }, firebaseAppName)
-  const db = admin.firestore(testApp);
+  const testApp = initializeApp({ projectId: uuid() }, firebaseAppName)
+  const db = getFirestore(testApp);
   const collectionName = uuid();
   const repository = PurchaselySubscriptionsRepository(collectionName)(db);
   const subscription: PurchaselySubscriptionDomain = subscriptionsFactory();
@@ -34,8 +35,8 @@ test("Subscription Deletion should return void", async t => {
 
 test("Subscription should not be retrievable from firestore after deletion", async t => {
   const firebaseAppName = uuid();
-  const testApp = admin.initializeApp({ projectId: uuid() }, firebaseAppName)
-  const db = admin.firestore(testApp);
+  const testApp = initializeApp({ projectId: uuid() }, firebaseAppName)
+  const db = getFirestore(testApp);
   const collectionName = uuid();
   const repository = PurchaselySubscriptionsRepository(collectionName)(db);
   const subscription: PurchaselySubscriptionDomain = subscriptionsFactory();

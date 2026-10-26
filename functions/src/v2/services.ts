@@ -1,4 +1,4 @@
-import Firebase from "firebase-admin";
+import { Auth } from "firebase-admin/auth";
 import FirebaseFirestore from "@google-cloud/firestore";
 
 import {
@@ -30,7 +30,7 @@ const servicesSetup = <T>(destinationSettings: PurchaselyFirestoreDestinationSet
 
 export const PurchaselyServices =
   (purchaselyConfig: PurchaselyConfigInterface) =>
-    (auth: Firebase.auth.Auth, db: FirebaseFirestore.Firestore): {
+    (auth: Auth, db: FirebaseFirestore.Firestore): {
       events: EventsInterface | null;
       firebaseCustomClaims: FirebaseCustomClaimsServiceInterface | null;
       logs: PurchaselyLoggingServiceInterface;

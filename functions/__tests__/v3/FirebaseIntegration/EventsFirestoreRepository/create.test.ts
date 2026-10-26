@@ -1,5 +1,6 @@
 
-import * as admin from "firebase-admin";
+import { initializeApp } from "firebase-admin/app";
+import { getFirestore } from "firebase-admin/firestore";
 import test from "ava";
 import { v4 as uuid } from "uuid";
 
@@ -10,8 +11,8 @@ import { eventsFactory, firestoreEventToStringDateEvent } from "./_events-factor
 
 test("Event Creation should not throw", async t => {
   const firebaseAppName = uuid();
-  const testApp = admin.initializeApp({ projectId: uuid() }, firebaseAppName)
-  const db = admin.firestore(testApp);
+  const testApp = initializeApp({ projectId: uuid() }, firebaseAppName)
+  const db = getFirestore(testApp);
   const collectionName = uuid();
   const repository = PurchaselyEventsRepository(collectionName)(db);
   const event: PurchaselyEventDomain = eventsFactory();
@@ -21,8 +22,8 @@ test("Event Creation should not throw", async t => {
 
 test("Event Creation should return the right Event", async t => {
   const firebaseAppName = uuid();
-  const testApp = admin.initializeApp({ projectId: uuid() }, firebaseAppName)
-  const db = admin.firestore(testApp);
+  const testApp = initializeApp({ projectId: uuid() }, firebaseAppName)
+  const db = getFirestore(testApp);
   const collectionName = uuid();
   const repository = PurchaselyEventsRepository(collectionName)(db);
   const event: PurchaselyEventDomain = eventsFactory();
@@ -32,8 +33,8 @@ test("Event Creation should return the right Event", async t => {
 
 test("Event should be retrievable from firestore after creation", async t => {
   const firebaseAppName = uuid();
-  const testApp = admin.initializeApp({ projectId: uuid() }, firebaseAppName)
-  const db = admin.firestore(testApp);
+  const testApp = initializeApp({ projectId: uuid() }, firebaseAppName)
+  const db = getFirestore(testApp);
   const collectionName = uuid();
   const repository = PurchaselyEventsRepository(collectionName)(db);
   const event: PurchaselyEventDomain = eventsFactory();

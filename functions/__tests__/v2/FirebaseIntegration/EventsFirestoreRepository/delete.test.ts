@@ -1,5 +1,6 @@
 
-import * as admin from "firebase-admin";
+import { initializeApp } from "firebase-admin/app";
+import { getFirestore } from "firebase-admin/firestore";
 import test from "ava";
 import { v4 as uuid } from "uuid";
 
@@ -10,8 +11,8 @@ import { eventsFactory } from "./_events-factory";
 
 test("Event Deletion should not throw if Event exists", async t => {
   const firebaseAppName = uuid();
-  const testApp = admin.initializeApp({ projectId: uuid() }, firebaseAppName)
-  const db = admin.firestore(testApp);
+  const testApp = initializeApp({ projectId: uuid() }, firebaseAppName)
+  const db = getFirestore(testApp);
   const collectionName = uuid();
   const repository = PurchaselyEventsRepository(collectionName)(db);
   const event: PurchaselyEventDomain = eventsFactory();
@@ -22,8 +23,8 @@ test("Event Deletion should not throw if Event exists", async t => {
 
 test("Event Deletion should return void", async t => {
   const firebaseAppName = uuid();
-  const testApp = admin.initializeApp({ projectId: uuid() }, firebaseAppName)
-  const db = admin.firestore(testApp);
+  const testApp = initializeApp({ projectId: uuid() }, firebaseAppName)
+  const db = getFirestore(testApp);
   const collectionName = uuid();
   const repository = PurchaselyEventsRepository(collectionName)(db);
   const event: PurchaselyEventDomain = eventsFactory();
@@ -34,8 +35,8 @@ test("Event Deletion should return void", async t => {
 
 test("Event should not be retrievable from firestore after deletion", async t => {
   const firebaseAppName = uuid();
-  const testApp = admin.initializeApp({ projectId: uuid() }, firebaseAppName)
-  const db = admin.firestore(testApp);
+  const testApp = initializeApp({ projectId: uuid() }, firebaseAppName)
+  const db = getFirestore(testApp);
   const collectionName = uuid();
   const repository = PurchaselyEventsRepository(collectionName)(db);
   const event: PurchaselyEventDomain = eventsFactory();

@@ -1,4 +1,4 @@
-import Firebase from "firebase-admin"
+import { Auth } from "firebase-admin/auth"
 import { FirebaseCustomClaimsRepository, FirebaseCustomClaimsRepositoryInterface } from "./repository";
 import { PurchaselyFirebaseCustomClaimsDomain } from "./domain/purchasely-firebase-custom-claims.domain";
 
@@ -55,5 +55,5 @@ export const FirebaseCustomClaimsService = (
 });
 
 export const FirebaseCustomClaimsServiceInstance =
-  (firebaseAuth: Firebase.auth.Auth): FirebaseCustomClaimsServiceInterface =>
+  (firebaseAuth: Auth): FirebaseCustomClaimsServiceInterface =>
     FirebaseCustomClaimsService(FirebaseCustomClaimsRepository(firebaseAuth));

@@ -1,4 +1,4 @@
-import Firebase from "firebase-admin"
+import { Auth } from "firebase-admin/auth"
 import { PurchaselyFirebaseCustomClaimsDomain } from "./domain/purchasely-firebase-custom-claims.domain";
 
 export type RepositoryDomain = {
@@ -39,7 +39,7 @@ const decodePurchaselyCustomClaims = (customClaims: { [key: string]: any; } | un
   }
 }
 
-const updateFirebaseCustomClaims = (firebaseAuth: Firebase.auth.Auth) => (userId: string) => (customClaims: RepositoryDomain) => {
+const updateFirebaseCustomClaims = (firebaseAuth: Auth) => (userId: string) => (customClaims: RepositoryDomain) => {
   console.log("Updated Custom Claims: ", JSON.stringify(customClaims));
   const encodedCustomClaims = {
     ...customClaims,
@@ -50,7 +50,7 @@ const updateFirebaseCustomClaims = (firebaseAuth: Firebase.auth.Auth) => (userId
 }
 
 // TODO: Move the business logic to the service layer. The repository shouldn't do all that
-export const FirebaseCustomClaimsRepository = (firebaseAuth: Firebase.auth.Auth): FirebaseCustomClaimsRepositoryInterface => ({
+export const FirebaseCustomClaimsRepository = (firebaseAuth: Auth): FirebaseCustomClaimsRepositoryInterface => ({
   get: (userFirestoreId: string) =>
     firebaseAuth.getUser(userFirestoreId)
       .then((user) => user.customClaims)
