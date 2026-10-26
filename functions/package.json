@@ -29,7 +29,7 @@
     "firebase-functions": "^7.4.0",
     "luxon": "^3.7.2",
     "typescript": "^6.0.3",
-    "uuid": "^14.0.0"
+    "uuid": "^14.0.3"
   },
   "devDependencies": {
     "@ava/typescript": "^7.0.0",
